@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frosted Delights Menu</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap'); /* Adding a nice script font */
+        body {
+            font-family: "Georgia", serif;
+            background-color: #000000;
+            color: #ffc404;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            overflow-x: hidden; /* Prevent horizontal scrollbar */
+        }
+        .logo {
+            width: 150px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .menu-title-container {
+            margin-bottom: 10px;
+        }
+        .menu-title {
+            font-size: 3em;  /* Increased the title size */
+            font-family: 'Dancing Script', cursive;
+            letter-spacing: 3px;
+            color: #ffc400;
+            text-transform: uppercase;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.7), 0 0 10px #ffffff;
+        }
+        .menu-section {
+            display: inline-block;
+            width: 45%;
+            vertical-align: top;
+            margin-top: -10px; /* Pull sections closer together */
+        }
+        .menu-section h2 {
+            font-size: 2.5em;  /* Increased section header size */
+            color: #ffc400;
+            font-family: "Playfair Display", serif;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.6), 0 0 8px #ffffff;
+        }
+        .menu-item {
+            font-size: 1.6em;  /* Increased menu item size */
+            font-weight: 500;
+            color: #ADD8E6;
+            margin: 8px 0;  /* Reduced space between menu items */
+            transition: color 0.3s ease-in;
+        }
+        .menu-item:hover {
+            color: #f6f6f6; /* Light pink color when hovering */
+        }
+        .spiked-note, .box-note {
+            font-size: 1.3em;  /* Increased the size of notes */
+            font-style: italic;
+            color: #228B22;
+            margin-top: 5px;  /* Reduced margin */
+        }
+
+        /* Horizontal lines between sections */
+        .divider {
+            width: 80%;
+            margin: 30px auto;
+            border-top: 1px dashed #ffc404;
+        }
+
+        /* Mascot Styling */
+        .mascot-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+        .mascot-container img {
+            width: 250px;
+            height: auto;
+        }
+
+        footer {
+            margin-top: 50px;
+            font-size: 1.2em;
+            color: #228B22;
+        }
+        .muddy-buddies {
+            display: block;
+            margin-top: -20px;
+            width: 100%;
+        }
+
+        /* Snowflakes */
+        .snowflake {
+            position: fixed;
+            top: -10px;
+            color: #ffffff;
+            font-size: 1.5em;
+            opacity: 0.9;
+            pointer-events: none;
+            animation: fall 10s linear infinite;
+        }
+
+        /* Snowflake falling animation */
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px);
+            }
+            100% {
+                transform: translateY(100vh);
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <img src="frosted_delights_logo.png" alt="Frosted Delights Logo" class="logo" style="width: 150px; height: auto;">
+    <div class="menu-title-container">
+        <h1 class="menu-title">FROSTED DELIGHTS</h1>
+    </div>
+
+    <!-- Mascot Section -->
+    <div class="mascot-container">
+        <img src="frosted_mascot.png" alt="Frosted Delights Mascot">
+    </div>
+
+    <div class="menu-section">
+        <h2>Ices</h2>
+        <p class="menu-item">Sour Watermelon $6</p>
+        <p class="menu-item">Sour Cherry $7</p>
+        <p class="menu-item">Watermelon Mint $5</p>
+        <p class="menu-item">Watermelon Lime $5.75</p>
+        <p class="menu-item">Limonana $6.50</p>
+        <p class="menu-item">Strawberry Lemon $8</p>
+        <p class="menu-item">Strawberry Mo $7</p>
+        <p class="box-note">* Box of 6 $12 / Box of 12 $36 </p>
+        <p class="spiked-note">* Can make them all spiked upon request</p>
+    </div>
+
+    <!-- Divider between sections -->
+    <div class="divider"></div>
+
+    <div class="menu-section">
+        <h2>Desserts</h2>
+        <p class="menu-item">Dubai Chocolate $12</p>
+        <p class="menu-item">Healthy Granola $20</p>
+        <p class="menu-item">Matcha Something $15</p>
+        <p class="menu-item">Matcha crackers $7 for 6 $12 for 12</p>
+        <p class="menu-item">Apple Pie $20/ $5 for slice</p>
+    </div>
+
+    <!-- Divider between sections -->
+    <div class="divider"></div>
+   
+    <!-- Muddy Buddies Section Directly under mascot -->
+    <div class="muddy-buddies">
+        <h2>Muddy Buddies</h2>
+        <p class="menu-item">Pasachio $17 16oz</p>
+        <p class="menu-item">Peanut Butter $10 16oz</p>
+        <p class="menu-item">Matcha and vanilla $15 16oz</p>
+        <p class="menu-item">Smore's $12 16oz</p>
+    </div>
+
+    <footer>
+        <p>Thank you from Frosted Delights! Enjoy our frozen and baked treats.</p>
+    </footer>
+
+    <!-- Snowflake Elements -->
+    <div id="snowflakes-container"></div>
+
+    <script>
+        // JavaScript to generate snowflakes
+        const snowflakeContainer = document.getElementById('snowflakes-container');
+        const numberOfSnowflakes = 50;  // Number of snowflakes to generate
+        const snowflakeSymbols = ['❅', '❆', '✼', '✻', '✽'];  // Different snowflake characters
+
+        for (let i = 0; i < numberOfSnowflakes; i++) {
+            let snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.innerHTML = snowflakeSymbols[Math.floor(Math.random() * snowflakeSymbols.length)];
+
+            // Randomize position and delay for each snowflake
+            snowflake.style.left = `${Math.random() * 100}vw`;
+            snowflake.style.animationDuration = `${Math.random() * 5 + 5}s`;
+            snowflake.style.fontSize = `${Math.random() * 1.5 + 1}em`;
+
+            snowflakeContainer.appendChild(snowflake);
+        }
+    </script>
+</body>
+</html>
