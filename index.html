@@ -269,8 +269,8 @@
             let message = `${order}\n\nTotal: $${total.toFixed(2)}`;
 
             // Send order to phone numbers using WhatsApp
-            let phoneNumber1 = "whatsapp://send?phone=+13476621528&text=" + encodeURIComponent(message);
-            let phoneNumber2 = "whatsapp://send?phone=+17327209910&text=" + encodeURIComponent(message);
+            let phoneNumber1 = "whatsapp://send?phone=+17327209910&text=" + encodeURIComponent(message);
+            let phoneNumber2 = "whatsapp://send?phone=+13476621528&text=" + encodeURIComponent(message);
             window.open(phoneNumber1, "_blank");
             window.open(phoneNumber2, "_blank");
         }
