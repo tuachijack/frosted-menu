@@ -144,19 +144,20 @@
     <div class="cart">
         <h3>Your Cart</h3>
         <ul id="cart-list" class="cart-list"></ul>
+        <p id="cart-total"></p>
         <button class="checkout-btn" onclick="checkout()">Checkout</button>
         <button class="clear-cart-btn" onclick="clearCart()">Clear Cart</button>
     </div>
 
     <div class="menu-section">
         <h2>Ices</h2>
-        <p class="menu-item">Sour Watermelon <button class="add-to-cart" onclick="addToCart('Sour Watermelon')">Add to Cart</button></p>
-        <p class="menu-item">Sour Cherry <button class="add-to-cart" onclick="addToCart('Sour Cherry')">Add to Cart</button></p>
-        <p class="menu-item">Watermelon Mint <button class="add-to-cart" onclick="addToCart('Watermelon Mint')">Add to Cart</button></p>
-        <p class="menu-item">Watermelon Lime <button class="add-to-cart" onclick="addToCart('Watermelon Lime')">Add to Cart</button></p>
-        <p class="menu-item">Limonana <button class="add-to-cart" onclick="addToCart('Limonana')">Add to Cart</button></p>
-        <p class="menu-item">Strawberry Lemon <button class="add-to-cart" onclick="addToCart('Strawberry Lemon')">Add to Cart</button></p>
-        <p class="menu-item">Strawberry Mo <button class="add-to-cart" onclick="addToCart('Strawberry Mo')">Add to Cart</button></p>
+        <p class="menu-item">Sour Watermelon - $6 <button class="add-to-cart" onclick="addToCart('Sour Watermelon', 6)">Add to Cart</button></p>
+        <p class="menu-item">Sour Cherry - $7 <button class="add-to-cart" onclick="addToCart('Sour Cherry', 7)">Add to Cart</button></p>
+        <p class="menu-item">Watermelon Mint - $5 <button class="add-to-cart" onclick="addToCart('Watermelon Mint', 5)">Add to Cart</button></p>
+        <p class="menu-item">Watermelon Lime - $5.75 <button class="add-to-cart" onclick="addToCart('Watermelon Lime', 5.75)">Add to Cart</button></p>
+        <p class="menu-item">Limonana - $6.50 <button class="add-to-cart" onclick="addToCart('Limonana', 6.5)">Add to Cart</button></p>
+        <p class="menu-item">Strawberry Lemon - $8 <button class="add-to-cart" onclick="addToCart('Strawberry Lemon', 8)">Add to Cart</button></p>
+        <p class="menu-item">Strawberry Mo - $7 <button class="add-to-cart" onclick="addToCart('Strawberry Mo', 7)">Add to Cart</button></p>
         <p class="box-note">* Box of 6 $12 / Box of 12 $36 </p>
         <p class="spiked-note">* Can make them all spiked upon request</p>
     </div>
@@ -166,11 +167,11 @@
 
     <div class="menu-section">
         <h2>Desserts</h2>
-        <p class="menu-item">Dubai Chocolate <button class="add-to-cart" onclick="addToCart('Dubai Chocolate')">Add to Cart</button></p>
-        <p class="menu-item">Healthy Granola <button class="add-to-cart" onclick="addToCart('Healthy Granola')">Add to Cart</button></p>
-        <p class="menu-item">Matcha Something <button class="add-to-cart" onclick="addToCart('Matcha Something')">Add to Cart</button></p>
-        <p class="menu-item">Matcha crackers <button class="add-to-cart" onclick="addToCart('Matcha crackers')">Add to Cart</button></p>
-        <p class="menu-item">Apple Pie <button class="add-to-cart" onclick="addToCart('Apple Pie')">Add to Cart</button></p>
+        <p class="menu-item">Dubai Chocolate - $12 <button class="add-to-cart" onclick="addToCart('Dubai Chocolate', 12)">Add to Cart</button></p>
+        <p class="menu-item">Healthy Granola - $20 <button class="add-to-cart" onclick="addToCart('Healthy Granola', 20)">Add to Cart</button></p>
+        <p class="menu-item">Matcha Something - $15 <button class="add-to-cart" onclick="addToCart('Matcha Something', 15)">Add to Cart</button></p>
+        <p class="menu-item">Matcha crackers - $12 <button class="add-to-cart" onclick="addToCart('Matcha crackers', 12)">Add to Cart</button></p>
+        <p class="menu-item">Apple Pie - $20 <button class="add-to-cart" onclick="addToCart('Apple Pie', 20)">Add to Cart</button></p>
     </div>
 
     <!-- Divider between sections -->
@@ -179,10 +180,10 @@
     <!-- Muddy Buddies Section Directly under mascot -->
     <div class="muddy-buddies">
         <h2>Muddy Buddies</h2>
-        <p class="menu-item">Pasachio 16oz <button class="add-to-cart" onclick="addToCart('Pasachio 16oz')">Add to Cart</button></p>
-        <p class="menu-item">Peanut Butter 16oz <button class="add-to-cart" onclick="addToCart('Peanut Butter 16oz')">Add to Cart</button></p>
-        <p class="menu-item">Matcha and vanilla 16oz <button class="add-to-cart" onclick="addToCart('Matcha and vanilla 16oz')">Add to Cart</button></p>
-        <p class="menu-item">Smore's 16oz <button class="add-to-cart" onclick="addToCart('Smore\'s 16oz')">Add to Cart</button></p>
+        <p class="menu-item">Pasachio 16oz - $17 <button class="add-to-cart" onclick="addToCart('Pasachio 16oz', 17)">Add to Cart</button></p>
+        <p class="menu-item">Peanut Butter 16oz - $10 <button class="add-to-cart" onclick="addToCart('Peanut Butter 16oz', 10)">Add to Cart</button></p>
+        <p class="menu-item">Matcha and vanilla 16oz - $15 <button class="add-to-cart" onclick="addToCart('Matcha and vanilla 16oz', 15)">Add to Cart</button></p>
+        <p class="menu-item">Smore's 16oz - $12 <button class="add-to-cart" onclick="addToCart('Smore\'s 16oz', 12)">Add to Cart</button></p>
     </div>
 
     <div class="instagram-link">
@@ -217,29 +218,35 @@
         // Cart functionality
         let cart = [];
 
-        function addToCart(item) {
+        function addToCart(item, price) {
             let existingItem = cart.find(cartItem => cartItem.item === item);
             if (existingItem) {
                 existingItem.quantity += 1;
+                existingItem.totalPrice += price;
             } else {
-                cart.push({ item, quantity: 1 });
+                cart.push({ item, price, quantity: 1, totalPrice: price });
             }
             displayCart();
         }
 
         function displayCart() {
             const cartList = document.getElementById('cart-list');
+            const cartTotal = document.getElementById('cart-total');
             cartList.innerHTML = '';
+            let totalAmount = 0;
             cart.forEach((cartItem, index) => {
+                totalAmount += cartItem.totalPrice;
                 const listItem = document.createElement('li');
-                listItem.innerHTML = `${cartItem.item} x${cartItem.quantity} <button onclick="removeFromCart(${index})">Remove</button>`;
+                listItem.innerHTML = `${cartItem.item} x${cartItem.quantity} - $${cartItem.totalPrice.toFixed(2)} <button onclick="removeFromCart(${index})">Remove</button>`;
                 cartList.appendChild(listItem);
             });
+            cartTotal.innerHTML = `Total: $${totalAmount.toFixed(2)}`;
         }
 
         function removeFromCart(index) {
             if (cart[index].quantity > 1) {
                 cart[index].quantity -= 1;
+                cart[index].totalPrice -= cart[index].price;
             } else {
                 cart.splice(index, 1);
             }
@@ -256,8 +263,10 @@
                 alert("Your cart is empty!");
                 return;
             }
-            let order = cart.map(item => `Hi, can I please order:\n${item.item} x${item.quantity}`).join('\n');
-            let message = `${order}`;
+            let order = "Hi, can I please order:\n";
+            order += cart.map(item => `${item.item} x${item.quantity} - $${item.totalPrice.toFixed(2)}`).join('\n');
+            let total = cart.reduce((acc, item) => acc + item.totalPrice, 0);
+            let message = `${order}\n\nTotal: $${total.toFixed(2)}`;
 
             // Send order to phone numbers using WhatsApp
             let phoneNumber1 = "whatsapp://send?phone=+13476621528&text=" + encodeURIComponent(message);
@@ -268,3 +277,4 @@
     </script>
 </body>
 </html>
+
