@@ -25,8 +25,28 @@
             margin-top: 10px;
             margin-bottom: 10px;
             display: inline-block;
+       
         }
        
+        .nav-header {
+    background-color: #53e2ff; /* Matches the background */
+    padding: 20px 0;
+    text-align: center;
+    font-family: 'Georgia', serif;
+}
+
+.nav-header a {
+    color: #000000fd; /* White text color */
+    text-decoration: none;
+    margin: 0 20px; /* Spacing between links */
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.nav-header a:hover {
+    color: #FFD700; /* Gold color on hover */
+}
+
         .menu-title-container {
             margin-bottom: 5px;
         }
@@ -227,12 +247,22 @@
     </style>
 </head>
 <body>
-    <img src="frosted_delights_logo.png" alt="Frosted Delights Logo" class="logo">
-    <img src="frosted_mascot.png" alt="Frosted Delights Mascot" class="mascot">
+    <body>
+        <img src="frosted_delights_logo.png" alt="Frosted Delights Logo" class="logo">
+        <img src="frosted_mascot.png" alt="Frosted Delights Mascot" class="mascot">
+    
+        <!-- Updated navigation header -->
+        <div class="nav-header">
+            <a href="#ices-section">Ices</a>
+            <a href="#desserts-section">Desserts</a>
+            <a href="#muddy-buddies-section">Muddy Buddies</a>
+        </div>
+    
+        <div class="menu-title-container">
+            <h1 class="menu-title">FROSTED DELIGHTS</h1>
+        </div>
+    
 
-    <div class="menu-title-container">
-        <h1 class="menu-title">FROSTED DELIGHTS</h1>
-    </div>
 
     <div class="flavor-of-the-month">
         Flavor of the Month: Pineapple Jalapeño Bliss
@@ -412,8 +442,8 @@
         }
     </script>
 
-    <div class="menu-section">
-        <h2>Ices</h2>
+<div class="menu-section" id="ices-section">
+    <h2>Ices</h2>
         <p class="bundle-info">Boxes 6 for $20 / 12 for $40 / 24 for $75</p>
         <p class="menu-item">Sour Watermelon - $6
             <input type="number" class="quantity-selector" id="quantity-sour-watermelon" value="1" min="1">
@@ -468,7 +498,7 @@
 
     <div class="divider"></div>
 
-    <div class="menu-section">
+    <div class="menu-section" id="desserts-section">
         <h2>Desserts</h2>
         <p class="bundle-info">Parve but can be made dairy upon request</p>
         <p class="menu-item">Healthy Granola - $7
@@ -495,7 +525,7 @@
 
     <div class="divider"></div>
 
-    <div class="menu-section">
+    <div class="menu-section" id="muddy-buddies-section">
         <h2>Muddy Buddies</h2>
         <p class="bundle-info">Parve but can be made dairy upon request</p>
         <p class="menu-item">Matcha - $8
@@ -529,3 +559,4 @@
     </div>
 </body>
 </html>
+
