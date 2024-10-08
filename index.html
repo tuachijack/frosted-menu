@@ -63,6 +63,10 @@
             cursor: pointer;
             margin-left: 10px;
         }
+        .quantity-selector {
+            margin-left: 10px;
+            width: 40px;
+        }
         .cart {
             margin-top: 15px;
             color: #ADD8E6;
@@ -129,41 +133,32 @@
             }
         }
 
-        /* Checkout Message Popup */
-        #checkout-message {
-            display: none;
+        /* Special Request Styling */
+        .special-request {
+            margin-top: 20px;
+        }
+
+        /* Prompt Styling */
+        .prompt-box {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background-color: #ffffff;
-            color: #000;
-            padding: 15px;
-            border: 1px solid #ADD8E6;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+            background-color: #000;
+            color: #ADD8E6;
+            border: 2px solid #ADD8E6;
+            padding: 20px;
             text-align: center;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
             z-index: 1000;
         }
-        #checkout-message p {
-            font-size: 1em;
+        .prompt-box img {
+            width: 50px;
             margin-bottom: 10px;
-        }
-        #checkout-message button {
-            background-color: #ADD8E6;
-            color: #000;
-            padding: 7px 10px;
-            font-size: 0.9em;
-            border: none;
-            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <div id="checkout-message">
-        <p>Upon checkout, it'll take you to WhatsApp and text us the order!</p>
-        <button onclick="closeMessage()">Got it!</button>
-    </div>
-
     <img src="frosted_delights_logo.png" alt="Frosted Delights Logo" class="logo">
     <div class="menu-title-container">
         <h1 class="menu-title">FROSTED DELIGHTS</h1>
@@ -174,25 +169,92 @@
         <img src="frosted_mascot.png" alt="Frosted Delights Mascot" style="width: 100px;">
     </div>
 
+    <!-- Recommended Section -->
+    <div class="recommended-section">
+        <h2>Recommended for You</h2>
+        <div class="recommended-item">
+            <span>Matcha and Vanilla 16oz</span>
+            <div class="rating">
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+                <span class="star">&#9734;</span>
+            </div>
+        </div>
+        <div class="recommended-item">
+            <span>Dubai Chocolate</span>
+            <div class="rating">
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Special Request Section -->
+    <div class="special-request">
+        <label for="special-request">Special Request:</label>
+        <input type="text" id="special-request" placeholder="e.g., No sugar, extra toppings">
+    </div>
+
     <!-- Cart Section -->
     <div class="cart">
         <h3>Your Cart</h3>
+        <div id="loyalty-points">Loyalty Points: 0</div>
         <ul id="cart-list" class="cart-list"></ul>
         <p id="cart-total"></p>
-        <button class="checkout-btn" onclick="showMessage(); checkout()">Checkout</button>
+        <button class="checkout-btn" onclick="showCheckoutMessage()">Checkout</button>
         <button class="clear-cart-btn" onclick="clearCart()">Clear Cart</button>
+    </div>
+
+    <!-- Order History Section -->
+    <div class="order-history" id="order-history-section">
+        <h3>Your Order History</h3>
+        <ul id="order-history-list"></ul>
+    </div>
+
+    <!-- Sign Up Section -->
+    <div class="sign-up-section">
+        <h3>Stay Updated!</h3>
+        <p>Sign up with your phone number to receive updates on new flavors and special deals!</p>
+        <input type="tel" id="phone-number" placeholder="Enter your phone number">
+        <button onclick="signUpForUpdates()">Sign Up</button>
     </div>
 
     <div class="menu-section">
         <h2>Ices</h2>
-        <p class="menu-item">Sour Watermelon - $6 <button class="add-to-cart" onclick="addToCart('Sour Watermelon', 6)">Add to Cart</button></p>
-        <p class="menu-item">Sour Cherry - $7 <button class="add-to-cart" onclick="addToCart('Sour Cherry', 7)">Add to Cart</button></p>
-        <p class="menu-item">Watermelon Mint - $5 <button class="add-to-cart" onclick="addToCart('Watermelon Mint', 5)">Add to Cart</button></p>
-        <p class="menu-item">Watermelon Lime - $5.75 <button class="add-to-cart" onclick="addToCart('Watermelon Lime', 5.75)">Add to Cart</button></p>
-        <p class="menu-item">Limonana - $6.50 <button class="add-to-cart" onclick="addToCart('Limonana', 6.5)">Add to Cart</button></p>
-        <p class="menu-item">Strawberry Lemon - $8 <button class="add-to-cart" onclick="addToCart('Strawberry Lemon', 8)">Add to Cart</button></p>
-        <p class="menu-item">Strawberry Mo - $7 <button class="add-to-cart" onclick="addToCart('Strawberry Mo', 7)">Add to Cart</button></p>
-        <p class="box-note">* Box of 6 $12 / Box of 12 $36 </p>
+        <p class="menu-item">Sour Watermelon - <span class="special-deal" style="text-decoration: line-through; color: red;">$8</span> <span class="special-price" style="color: green;">$6</span>
+            <input type="number" class="quantity-selector" id="quantity-sour-watermelon" value="1" min="1">
+            <button class="add-to-cart" onclick="addToCart('Sour Watermelon', 6, document.getElementById('quantity-sour-watermelon').value)">Add to Cart</button>
+        </p>
+        <p class="menu-item">Sour Cherry - $7
+            <input type="number" class="quantity-selector" id="quantity-sour-cherry" value="1" min="1">
+            <button class="add-to-cart" onclick="addToCart('Sour Cherry', 7, document.getElementById('quantity-sour-cherry').value)">Add to Cart</button>
+        </p>
+        <p class="menu-item">Watermelon Mint - $5
+            <input type="number" class="quantity-selector" id="quantity-watermelon-mint" value="1" min="1">
+            <button class="add-to-cart" onclick="addToCart('Watermelon Mint', 5, document.getElementById('quantity-watermelon-mint').value)">Add to Cart</button>
+        </p>
+        <p class="menu-item">Watermelon Lime - $5.75
+            <input type="number" class="quantity-selector" id="quantity-watermelon-lime" value="1" min="1">
+            <button class="add-to-cart" onclick="addToCart('Watermelon Lime', 5.75, document.getElementById('quantity-watermelon-lime').value)">Add to Cart</button>
+        </p>
+        <p class="menu-item">Limonana - $6.50
+            <input type="number" class="quantity-selector" id="quantity-limonana" value="1" min="1">
+            <button class="add-to-cart" onclick="addToCart('Limonana', 6.5, document.getElementById('quantity-limonana').value)">Add to Cart</button>
+        </p>
+        <p class="menu-item">Strawberry Lemon - $8
+            <input type="number" class="quantity-selector" id="quantity-strawberry-lemon" value="1" min="1">
+            <button class="add-to-cart" onclick="addToCart('Strawberry Lemon', 8, document.getElementById('quantity-strawberry-lemon').value)">Add to Cart</button>
+        </p>
+        <p class="menu-item">Strawberry Mo - $7
+            <input type="number" class="quantity-selector" id="quantity-strawberry-mo" value="1" min="1">
+            <button class="add-to-cart" onclick="addToCart('Strawberry Mo', 7, document.getElementById('quantity-strawberry-mo').value)">Add to Cart</button>
+        </p>
+        <p class="box-note">* Box of 6 $12 / Box of 12 $36 / Box of 24 $60 </p>
         <p class="spiked-note">* Can make them all spiked upon request</p>
     </div>
 
@@ -201,11 +263,26 @@
 
     <div class="menu-section">
         <h2>Desserts</h2>
-        <p class="menu-item">Dubai Chocolate - $12 <button class="add-to-cart" onclick="addToCart('Dubai Chocolate', 12)">Add to Cart</button></p>
-        <p class="menu-item">Healthy Granola - $20 <button class="add-to-cart" onclick="addToCart('Healthy Granola', 20)">Add to Cart</button></p>
-        <p class="menu-item">Matcha Something - $15 <button class="add-to-cart" onclick="addToCart('Matcha Something', 15)">Add to Cart</button></p>
-        <p class="menu-item">Matcha crackers - $12 <button class="add-to-cart" onclick="addToCart('Matcha crackers', 12)">Add to Cart</button></p>
-        <p class="menu-item">Apple Pie - $20 <button class="add-to-cart" onclick="addToCart('Apple Pie', 20)">Add to Cart</button></p>
+        <p class="menu-item">Dubai Chocolate - $12
+            <input type="number" class="quantity-selector" id="quantity-dubai-chocolate" value="1" min="1">
+            <button class="add-to-cart" onclick="addToCart('Dubai Chocolate', 12, document.getElementById('quantity-dubai-chocolate').value)">Add to Cart</button>
+        </p>
+        <p class="menu-item">Healthy Granola - $20
+            <input type="number" class="quantity-selector" id="quantity-healthy-granola" value="1" min="1">
+            <button class="add-to-cart" onclick="addToCart('Healthy Granola', 20, document.getElementById('quantity-healthy-granola').value)">Add to Cart</button>
+        </p>
+        <p class="menu-item">Matcha Something - $15
+            <input type="number" class="quantity-selector" id="quantity-matcha-something" value="1" min="1">
+            <button class="add-to-cart" onclick="addToCart('Matcha Something', 15, document.getElementById('quantity-matcha-something').value)">Add to Cart</button>
+        </p>
+        <p class="menu-item">Matcha crackers - $12
+            <input type="number" class="quantity-selector" id="quantity-matcha-crackers" value="1" min="1">
+            <button class="add-to-cart" onclick="addToCart('Matcha crackers', 12, document.getElementById('quantity-matcha-crackers').value)">Add to Cart</button>
+        </p>
+        <p class="menu-item">Apple Pie - $20
+            <input type="number" class="quantity-selector" id="quantity-apple-pie" value="1" min="1">
+            <button class="add-to-cart" onclick="addToCart('Apple Pie', 20, document.getElementById('quantity-apple-pie').value)">Add to Cart</button>
+        </p>
     </div>
 
     <!-- Divider between sections -->
@@ -214,10 +291,22 @@
     <!-- Muddy Buddies Section Directly under mascot -->
     <div class="muddy-buddies">
         <h2>Muddy Buddies</h2>
-        <p class="menu-item">Pasachio 16oz - $17 <button class="add-to-cart" onclick="addToCart('Pasachio 16oz', 17)">Add to Cart</button></p>
-        <p class="menu-item">Peanut Butter 16oz - $10 <button class="add-to-cart" onclick="addToCart('Peanut Butter 16oz', 10)">Add to Cart</button></p>
-        <p class="menu-item">Matcha and vanilla 16oz - $15 <button class="add-to-cart" onclick="addToCart('Matcha and vanilla 16oz', 15)">Add to Cart</button></p>
-        <p class="menu-item">Smore's 16oz - $12 <button class="add-to-cart" onclick="addToCart('Smore\'s 16oz', 12)">Add to Cart</button></p>
+        <p class="menu-item">Pasachio 16oz - $17
+            <input type="number" class="quantity-selector" id="quantity-pasachio" value="1" min="1">
+            <button class="add-to-cart" onclick="addToCart('Pasachio 16oz', 17, document.getElementById('quantity-pasachio').value)">Add to Cart</button>
+        </p>
+        <p class="menu-item">Peanut Butter 16oz - $10
+            <input type="number" class="quantity-selector" id="quantity-peanut-butter" value="1" min="1">
+            <button class="add-to-cart" onclick="addToCart('Peanut Butter 16oz', 10, document.getElementById('quantity-peanut-butter').value)">Add to Cart</button>
+        </p>
+        <p class="menu-item">Matcha and vanilla 16oz - $15
+            <input type="number" class="quantity-selector" id="quantity-matcha-vanilla" value="1" min="1">
+            <button class="add-to-cart" onclick="addToCart('Matcha and vanilla 16oz', 15, document.getElementById('quantity-matcha-vanilla').value)">Add to Cart</button>
+        </p>
+        <p class="menu-item">Smore's 16oz - $12
+            <input type="number" class="quantity-selector" id="quantity-smores" value="1" min="1">
+            <button class="add-to-cart" onclick="addToCart('Smore\'s 16oz', 12, document.getElementById('quantity-smores').value)">Add to Cart</button>
+        </p>
     </div>
 
     <div class="instagram-link">
@@ -234,6 +323,37 @@
     <div id="snowflakes-container"></div>
 
     <script>
+        // Prices and prompts configuration (easily editable section)
+        const pricingConfig = {
+            ices: {
+                "Sour Watermelon": 6,
+                "Sour Cherry": 7,
+                "Watermelon Mint": 5,
+                "Watermelon Lime": 5.75,
+                "Limonana": 6.5,
+                "Strawberry Lemon": 8,
+                "Strawberry Mo": 7,
+                boxPrices: {
+                    6: 12,
+                    12: 36,
+                    24: 60
+                }
+            },
+            desserts: {
+                "Dubai Chocolate": 12,
+                "Healthy Granola": 20,
+                "Matcha Something": 15,
+                "Matcha crackers": 12,
+                "Apple Pie": 20
+            },
+            muddyBuddies: {
+                "Pasachio 16oz": 17,
+                "Peanut Butter 16oz": 10,
+                "Matcha and vanilla 16oz": 15,
+                "Smore's 16oz": 12
+            }
+        };
+
         // JavaScript to generate snowflakes
         const snowflakeContainer = document.getElementById('snowflakes-container');
         const numberOfSnowflakes = 10;
@@ -251,21 +371,50 @@
 
         // Cart functionality
         let cart = [];
+        let loyaltyPoints = 0;
+        let referralMessageShown = false;
+        let orderHistory = [];
+        let phoneNumbers = [];
 
-        function addToCart(item, price) {
+        function addToCart(item, price, quantity = 1) {
+            quantity = parseInt(quantity);
             let existingItem = cart.find(cartItem => cartItem.item === item);
             if (existingItem) {
-                existingItem.quantity += 1;
-                existingItem.totalPrice += price;
+                existingItem.quantity += quantity;
+                existingItem.totalPrice += price * quantity;
             } else {
-                cart.push({ item, price, quantity: 1, totalPrice: price });
+                cart.push({ item, price, quantity: quantity, totalPrice: price * quantity });
             }
+            loyaltyPoints += Math.floor((price * quantity) / 10); // Add loyalty points (1 point per $10 spent)
+            if (!referralMessageShown) {
+                showRecommendationPrompt();
+                referralMessageShown = true;
+            }
+            adjustBoxPrice();
             displayCart();
+        }
+
+        function adjustBoxPrice() {
+            let iceItems = cart.filter(item => pricingConfig.ices.hasOwnProperty(item.item));
+            let iceCount = iceItems.reduce((acc, item) => acc + item.quantity, 0);
+            if (iceCount >= 6) {
+                let applicableBoxSize = Object.keys(pricingConfig.ices.boxPrices).reverse().find(size => iceCount >= size);
+                let boxPrice = pricingConfig.ices.boxPrices[applicableBoxSize];
+                // Set individual items' prices to zero
+                iceItems.forEach(item => {
+                    item.totalPrice = 0;
+                });
+                // Remove existing box entry if any
+                cart = cart.filter(item => !item.item.startsWith("Box of"));
+                // Add box to cart
+                cart.push({ item: `Box of ${applicableBoxSize} Ices`, price: boxPrice, quantity: 1, totalPrice: boxPrice });
+            }
         }
 
         function displayCart() {
             const cartList = document.getElementById('cart-list');
             const cartTotal = document.getElementById('cart-total');
+            const loyaltyPointsDisplay = document.getElementById('loyalty-points');
             cartList.innerHTML = '';
             let totalAmount = 0;
             cart.forEach((cartItem, index) => {
@@ -275,6 +424,7 @@
                 cartList.appendChild(listItem);
             });
             cartTotal.innerHTML = `Total: $${totalAmount.toFixed(2)}`;
+            loyaltyPointsDisplay.innerHTML = `Loyalty Points: ${loyaltyPoints}`;
         }
 
         function removeFromCart(index) {
@@ -292,6 +442,24 @@
             displayCart();
         }
 
+        function showRecommendationPrompt() {
+            const promptBox = document.createElement('div');
+            promptBox.classList.add('prompt-box');
+            promptBox.innerHTML = `<img src="frosted_mascot.png" alt="Mascot"><p>How about adding a dessert with your pop?</p><button onclick="closePrompt(this)">Okay!</button>`;
+            document.body.appendChild(promptBox);
+        }
+
+        function closePrompt(element) {
+            document.body.removeChild(element.parentElement);
+        }
+
+        function showCheckoutMessage() {
+            const promptBox = document.createElement('div');
+            promptBox.classList.add('prompt-box');
+            promptBox.innerHTML = `<img src="frosted_mascot.png" alt="Mascot"><p>You will be taken to WhatsApp to complete your order.</p><button onclick="closePrompt(this); checkout();">Proceed</button>`;
+            document.body.appendChild(promptBox);
+        }
+
         function checkout() {
             if (cart.length === 0) {
                 alert("Your cart is empty!");
@@ -300,23 +468,41 @@
             let order = "Hi, can I please order:\n";
             order += cart.map(item => `${item.item} x${item.quantity} - $${item.totalPrice.toFixed(2)}`).join('\n');
             let total = cart.reduce((acc, item) => acc + item.totalPrice, 0);
-            let message = `${order}\n\nTotal: $${total.toFixed(2)}`;
+            let specialRequest = document.getElementById('special-request').value;
+            let message = `${order}\n\nTotal: $${total.toFixed(2)}\nSpecial Request: ${specialRequest}`;
 
             // Send order to phone numbers using WhatsApp
             let phoneNumber1 = "whatsapp://send?phone=+17327209910&text=" + encodeURIComponent(message);
             let phoneNumber2 = "whatsapp://send?phone=+13476621528&text=" + encodeURIComponent(message);
             window.open(phoneNumber1, "_blank");
             window.open(phoneNumber2, "_blank");
+
+            // Save order to order history
+            orderHistory.push({ items: cart.slice(), total, specialRequest });
+            clearCart();
+            displayOrderHistory();
         }
 
-        function showMessage() {
-            document.getElementById('checkout-message').style.display = 'block';
+        function displayOrderHistory() {
+            const orderHistoryList = document.getElementById('order-history-list');
+            orderHistoryList.innerHTML = '';
+            orderHistory.forEach((order, index) => {
+                const listItem = document.createElement('li');
+                let itemsString = order.items.map(item => `${item.item} x${item.quantity}`).join(', ');
+                listItem.innerHTML = `Order #${index + 1}: ${itemsString} - Total: $${order.total.toFixed(2)} - Special Request: ${order.specialRequest}`;
+                orderHistoryList.appendChild(listItem);
+            });
         }
 
-        function closeMessage() {
-            document.getElementById('checkout-message').style.display = 'none';
+        function signUpForUpdates() {
+            const phoneNumber = document.getElementById('phone-number').value;
+            if (phoneNumber) {
+                phoneNumbers.push(phoneNumber);
+                alert('Thank you for signing up! You will receive updates on new flavors and special deals.');
+            } else {
+                alert('Please enter a valid phone number.');
+            }
         }
     </script>
 </body>
 </html>
-
