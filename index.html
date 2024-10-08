@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Frosted Delights Menu</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon"> 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
         body {
@@ -280,7 +281,7 @@
     <!-- Special Request Section -->
     <div class="special-request">
         <label for="special-request">Special Request:</label>
-        <input type="text" id="special-request" placeholder="e.g., No sugar, extra toppings">
+        <input type="text" id="special-request" placeholder="e.g., No sugar, Make Dairy">
     </div>
 
     <!-- Cart Section -->
@@ -331,47 +332,64 @@
                 showRecommendationPrompt();
                 referralMessageShown = true;
             }
+        }function applyBundlePricing() {
+    const bundleThresholds = {6: 20, 12: 40, 24: 75}; // Pricing for bundles
+    let iceCount = 0;
+    let iceItems = [];
+
+    // Count the ice items and store their indices in the cart
+    cart.forEach((item, index) => {
+        // Ensure to check for relevant ices by name (adjust based on your item names)
+        if (item.item.toLowerCase().includes('ice')) {
+            iceCount += item.quantity;
+            iceItems.push({ index, quantity: item.quantity }); // Store both index and quantity
         }
+    });
 
-        function applyBundlePricing() {
-            const bundleThresholds = {6: 20, 12: 40, 24: 75}; // Pricing for bundles
-            let iceCount = 0;
-            let iceItems = [];
+    // If iceCount doesn't meet any threshold, return without applying bundle pricing
+    if (iceCount < 6) return;
 
-            // Count the ice items and store their indices in the cart
-            cart.forEach((item, index) => {
-                if (item.item.toLowerCase().includes('ice')) {
-                    iceCount += item.quantity;
-                    iceItems.push(index);
+    // Check if the ice count meets any bundle threshold (starting with the largest)
+    for (let threshold of [24, 12, 6]) {
+        if (iceCount >= threshold) {
+            const bundlePrice = bundleThresholds[threshold];
+
+            // Add or update the bundle item in the cart
+            let existingBundle = cart.find(cartItem => cartItem.item === `Box of ${threshold} Ices`);
+            if (!existingBundle) {
+                // If bundle doesn't exist, add it to the cart
+                cart.push({
+                    item: `Box of ${threshold} Ices`,
+                    price: bundlePrice,
+                    quantity: 1,
+                    totalPrice: bundlePrice,
+                    isSpiked: false
+                });
+            } else {
+                // If bundle exists, update its price and quantity
+                existingBundle.price = bundlePrice;
+                existingBundle.totalPrice = bundlePrice;
+                existingBundle.quantity = 1; // Assuming a fixed quantity for bundles
+            }
+
+            // Adjust the prices of individual ice items to $0 to reflect bundle
+            let itemsAdjusted = 0;
+            iceItems.forEach(({ index, quantity }) => {
+                if (itemsAdjusted + quantity <= threshold) {
+                    cart[index].totalPrice = 0; // Set item price to $0 as part of the bundle
+                    itemsAdjusted += quantity;
+                } else {
+                    let remaining = threshold - itemsAdjusted;
+                    cart[index].totalPrice = (remaining / cart[index].quantity) * cart[index].price;
+                    itemsAdjusted += remaining;
                 }
             });
 
-            // Check if the ice count meets any bundle threshold (starting with the largest)
-            for (let threshold of [24, 12, 6]) {
-                if (iceCount >= threshold) {
-                    const bundlePrice = bundleThresholds[threshold];
-
-                    // Add the bundle item to the cart (if not already there)
-                    let existingBundle = cart.find(cartItem => cartItem.item === `Box of ${threshold} Ices`);
-                    if (!existingBundle) {
-                        cart.push({
-                            item: `Box of ${threshold} Ices`,
-                            price: bundlePrice,
-                            quantity: 1,
-                            totalPrice: bundlePrice,
-                            isSpiked: false
-                        });
-                    }
-
-                    // Adjust the prices of individual ice items to $0
-                    iceItems.forEach(index => {
-                        cart[index].totalPrice = 0; // Set individual ice prices to 0
-                    });
-
-                    break; // Exit loop once a valid threshold is applied
-                }
-            }
+            break; // Exit loop once a valid threshold is applied
         }
+    }
+}
+
 
         function displayCart() {
             applyBundlePricing();
@@ -505,7 +523,7 @@
             <input type="number" class="quantity-selector" id="quantity-healthy-granola" value="1" min="1">
             <button class="add-to-cart" onclick="addToCart('Healthy Granola', 7, document.getElementById('quantity-healthy-granola').value)">Add to Cart</button>
         </p>
-        <p class="menu-item">Apple Pie - $40
+        <p class="menu-item">Apple Pie - $9
             <input type="number" class="quantity-selector" id="quantity-apple-pie" value="1" min="1">
             <button class="add-to-cart" onclick="addToCart('Apple Pie', 9, document.getElementById('quantity-apple-pie').value)">Add to Cart</button>
         </p>
