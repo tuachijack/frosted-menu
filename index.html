@@ -55,11 +55,13 @@
             font-weight: 500;
             color: #ADD8E6;
             margin: 6px 0;
-            transition: color 0.3s ease-in;
+            transition: color 0.3s ease-in, transform 0.2s, box-shadow 0.2s;
             position: relative;
         }
         .menu-item:hover {
             color: #ff00aa;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
         }
         .add-to-cart {
             background-color: #ADD8E6;
@@ -92,13 +94,11 @@
             cursor: pointer;
             color: black;
         }
-        /* Horizontal lines between sections */
         .divider {
             width: 80%;
             margin: 20px auto;
             border-top: 1px dashed #ADD8E6;
         }
-        /* Instagram Icon */
         .instagram-link {
             margin-top: 10px;
             display: flex;
@@ -108,7 +108,6 @@
             width: 40px;
             height: 40px;
         }
-
         footer {
             margin-top: 30px;
             font-size: 1em;
@@ -119,18 +118,15 @@
             margin-top: -10px;
             width: 100%;
         }
-
-        /* Snowflakes */
         .snowflake {
             position: fixed;
             top: -10px;
             color: #ffffff;
-            font-size:0.8em;
+            font-size: 0.8em;
             opacity: 0.3;
             pointer-events: none;
             animation: fall 20s linear infinite;
         }
-
         @keyframes fall {
             0% {
                 transform: translateY(-100px);
@@ -139,13 +135,9 @@
                 transform: translateY(100vh);
             }
         }
-
-        /* Special Request Styling */
         .special-request {
             margin-top: 20px;
         }
-
-        /* Prompt Styling */
         .prompt-box {
             position: fixed;
             top: 50%;
@@ -163,12 +155,23 @@
             width: 50px;
             margin-bottom: 10px;
         }
-
-        /* Bundle pricing info styling */
         .bundle-info {
             font-size: 0.9em;
             color: #228B22;
             margin-top: 4px;
+        }
+        /* Instagram feed styling */
+        .instagram-feed {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .instagram-feed img {
+            width: 100px;
+            height: 100px;
+            margin: 5px;
+            border-radius: 5px;
         }
     </style>
 </head>
@@ -182,35 +185,14 @@
         Flavor of the Month: Pineapple Jalapeño Bliss
     </div>
 
-    <!-- Mascot Section -->
-    <div class="mascot-container">
-        <img src="frosted_mascot.png" alt="Frosted Delights Mascot" style="width: 100px;">
-    </div>
+    <!-- Instagram Feed Section -->
+<div class="instagram-feed">
+    <a href="https://www.instagram.com/p/POST_ID_1" target="_blank"><img src="image_url_1" alt="Instagram Post 1"></a>
+    <a href="https://www.instagram.com/p/POST_ID_2" target="_blank"><img src="image_url_2" alt="Instagram Post 2"></a>
+    <a href="https://www.instagram.com/p/POST_ID_3" target="_blank"><img src="image_url_3" alt="Instagram Post 3"></a>
+    <a href="https://www.instagram.com/p/POST_ID_4" target="_blank"><img src="image_url_4" alt="Instagram Post 4"></a>
+</div>
 
-    <!-- Recommended Section -->
-    <div class="recommended-section">
-        <h2>Recommended for You</h2>
-        <div class="recommended-item">
-            <span>Matcha and Vanilla 16oz</span>
-            <div class="rating">
-                <span class="star">★</span>
-                <span class="star">★</span>
-                <span class="star">★</span>
-                <span class="star">★</span>
-                <span class="star">☆</span>
-            </div>
-        </div>
-        <div class="recommended-item">
-            <span>Dubai Chocolate</span>
-            <div class="rating">
-                <span class="star">★</span>
-                <span class="star">★</span>
-                <span class="star">★</span>
-                <span class="star">★</span>
-                <span class="star">★</span>
-            </div>
-        </div>
-    </div>
 
     <!-- Special Request Section -->
     <div class="special-request">
@@ -234,7 +216,7 @@
         // Generate snowflakes
         const snowflakesContainer = document.getElementById('snowflakes-container');
         const snowflakeSymbols = ['❅', '❆', '✼', '✻', '✽'];
-        const numberOfSnowflakes = 50;
+        const numberOfSnowflakes = 10;
         for (let i = 0; i < numberOfSnowflakes; i++) {
             const snowflake = document.createElement('div');
             snowflake.className = 'snowflake';
@@ -427,8 +409,7 @@
         </p>
         <p class="menu-item">Vanilla Date Smoothie - $8.50
             <input type="number" class="quantity-selector" id="quantity-vanilla-date-smoothie" value="1" min="1">
-            <label><input type="checkbox" id="spiked-vanilla-date-smoothie"> Spiked (+$5)</label>
-            <button class="add-to-cart" onclick="addToCart('Vanilla Date Smoothie', 8.5, document.getElementById('quantity-vanilla-date-smoothie').value, document.getElementById('spiked-vanilla-date-smoothie').checked)">Add to Cart</button>
+            <button class="add-to-cart" onclick="addToCart('Vanilla Date Smoothie', 8.5, document.getElementById('quantity-vanilla-date-smoothie').value)">Add to Cart</button>
         </p>
     </div>
 
@@ -455,7 +436,7 @@
         </p>
         <p class="menu-item">S'mores Pie - $10
             <input type="number" class="quantity-selector" id="quantity-smores-pie" value="1" min="1">
-            <button class="add-to-cart" onclick="addToCart('S'mores Pie', 10, document.getElementById('quantity-smores-pie').value)">Add to Cart</button>
+            <button class="add-to-cart" onclick="addToCart('S\'mores Pie', 10, document.getElementById('quantity-smores-pie').value)">Add to Cart</button>
         </p>
     </div>
 
@@ -470,7 +451,7 @@
         </p>
         <p class="menu-item">S'mores - $9
             <input type="number" class="quantity-selector" id="quantity-smores" value="1" min="1">
-            <button class="add-to-cart" onclick="addToCart('S'mores', 9, document.getElementById('quantity-smores').value)">Add to Cart</button>
+            <button class="add-to-cart" onclick="addToCart('S\'mores', 9, document.getElementById('quantity-smores').value)">Add to Cart</button>
         </p>
         <p class="menu-item">Dubai Chocolate - $10
             <input type="number" class="quantity-selector" id="quantity-dubai-chocolate" value="1" min="1">
