@@ -61,23 +61,6 @@
         .menu-item:hover {
             color: #ff00aa;
         }
-        .menu-item:hover .ingredient-tooltip {
-            display: block;
-        }
-        .ingredient-tooltip {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #000;
-            color: #ADD8E6;
-            padding: 10px;
-            border: 2px solid #ADD8E6;
-            z-index: 10;
-            white-space: nowrap;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-        }
         .add-to-cart {
             background-color: #ADD8E6;
             color: #000;
@@ -180,6 +163,13 @@
             width: 50px;
             margin-bottom: 10px;
         }
+
+        /* Bundle pricing info styling */
+        .bundle-info {
+            font-size: 0.9em;
+            color: #228B22;
+            margin-top: 4px;
+        }
     </style>
 </head>
 <body>
@@ -203,21 +193,21 @@
         <div class="recommended-item">
             <span>Matcha and Vanilla 16oz</span>
             <div class="rating">
-                <span class="star">&#9733;</span>
-                <span class="star">&#9733;</span>
-                <span class="star">&#9733;</span>
-                <span class="star">&#9733;</span>
-                <span class="star">&#9734;</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">☆</span>
             </div>
         </div>
         <div class="recommended-item">
             <span>Dubai Chocolate</span>
             <div class="rating">
-                <span class="star">&#9733;</span>
-                <span class="star">&#9733;</span>
-                <span class="star">&#9733;</span>
-                <span class="star">&#9733;</span>
-                <span class="star">&#9733;</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
             </div>
         </div>
     </div>
@@ -240,143 +230,21 @@
     <!-- Snowflake Elements -->
     <div id="snowflakes-container"></div>
 
-    <!-- Ingredient Configuration Section -->
     <script>
-        const ingredientConfig = {
-            ices: {
-                "Sour Watermelon": {
-                    price: 6,
-                    ingredients: "Watermelon, lemon, sugar",
-                    calories: 120
-                },
-                "Watermelon Mint": {
-                    price: 5,
-                    ingredients: "Watermelon, mint, sugar",
-                    calories: 110
-                },
-                "Watermelon Lime": {
-                    price: 5.75,
-                    ingredients: "Watermelon, lime, sugar",
-                    calories: 115
-                },
-                "Sour Cherry": {
-                    price: 7,
-                    ingredients: "Cherry, lemon, sugar",
-                    calories: 130
-                },
-                "Limonana": {
-                    price: 6.5,
-                    ingredients: "Lemon, mint, sugar",
-                    calories: 100
-                },
-                "Strawberry Blueberry Lemonade": {
-                    price: 8,
-                    ingredients: "Strawberry, blueberry, lemon, sugar",
-                    calories: 140
-                },
-                "Strawberry Mojito": {
-                    price: 7.5,
-                    ingredients: "Strawberry, mint, lime, sugar",
-                    calories: 125
-                },
-                "Pineapple Jalapeño": {
-                    price: 6.75,
-                    ingredients: "Pineapple, jalapeño, sugar",
-                    calories: 105
-                },
-                "Pina Colada": {
-                    price: 9,
-                    ingredients: "Pineapple, coconut milk, sugar",
-                    calories: 150
-                },
-                "Vanilla Date Smoothie": {
-                    price: 8.5,
-                    ingredients: "Dates, vanilla, almond milk",
-                    calories: 160
-                }
-            },
-            desserts: {
-                "Healthy Granola": {
-                    price: 7,
-                    ingredients: "Oats, honey, nuts, dried fruit",
-                    calories: 200
-                },
-                "Apple Pie": {
-                    price: 9,
-                    ingredients: "Apple, cinnamon, pie crust",
-                    calories: 300
-                },
-                "Tollhouse Pie": {
-                    price: 11,
-                    ingredients: "Chocolate chips, sugar, butter, eggs",
-                    calories: 400
-                },
-                "Pecan Pie": {
-                    price: 12,
-                    ingredients: "Pecans, corn syrup, pie crust",
-                    calories: 450
-                },
-                "S'mores Pie": {
-                    price: 10,
-                    ingredients: "Chocolate, marshmallows, graham cracker crust",
-                    calories: 350
-                }
-            },
-            muddyBuddies: {
-                "Matcha": {
-                    price: 8,
-                    ingredients: "White chocolate, matcha powder, rice cereal",
-                    calories: 180
-                },
-                "S'mores": {
-                    price: 9,
-                    ingredients: "Milk chocolate, marshmallows, graham cracker",
-                    calories: 190
-                },
-                "Dubai Chocolate": {
-                    price: 10,
-                    ingredients: "Dark chocolate, dates, cardamom",
-                    calories: 220
-                },
-                "Sugar Cookie": {
-                    price: 7,
-                    ingredients: "White chocolate, sugar cookie mix, rice cereal",
-                    calories: 170
-                },
-                "Snickerdoodle": {
-                    price: 7.5,
-                    ingredients: "Cinnamon, white chocolate, sugar",
-                    calories: 175
-                },
-                "Cookies & Crème": {
-                    price: 8.5,
-                    ingredients: "White chocolate, chocolate cookies, rice cereal",
-                    calories: 200
-                },
-                "Peppermint Bark": {
-                    price: 9,
-                    ingredients: "White chocolate, peppermint candies, dark chocolate",
-                    calories: 210
-                }
-            }
-        };
-
-        // JavaScript to generate snowflakes
-        const snowflakeContainer = document.getElementById('snowflakes-container');
-        const numberOfSnowflakes = 10;
+        // Generate snowflakes
+        const snowflakesContainer = document.getElementById('snowflakes-container');
         const snowflakeSymbols = ['❅', '❆', '✼', '✻', '✽'];
-
+        const numberOfSnowflakes = 50;
         for (let i = 0; i < numberOfSnowflakes; i++) {
-            let snowflake = document.createElement('div');
-            snowflake.classList.add('snowflake');
-            snowflake.innerHTML = snowflakeSymbols[Math.floor(Math.random() * snowflakeSymbols.length)];
-            snowflake.style.left = `${Math.random() * 100}vw`;
-            snowflake.style.animationDuration = `${Math.random() * 5 + 5}s`;
-            snowflake.style.fontSize = `${Math.random() * 1.2 + 0.8}em`;
-            snowflakeContainer.appendChild(snowflake);
+            const snowflake = document.createElement('div');
+            snowflake.className = 'snowflake';
+            snowflake.innerText = snowflakeSymbols[Math.floor(Math.random() * snowflakeSymbols.length)];
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.animationDuration = Math.random() * 5 + 5 + 's';
+            snowflake.style.fontSize = Math.random() * 1.2 + 0.8 + 'em';
+            snowflakesContainer.appendChild(snowflake);
         }
 
-        // Cart functionality
         let cart = [];
         let referralMessageShown = false;
 
@@ -393,13 +261,55 @@
                 cart.push({ item: itemName, price: price, quantity: quantity, totalPrice: finalPrice, isSpiked: isSpiked });
             }
             displayCart();
+
             if (!referralMessageShown) {
                 showRecommendationPrompt();
                 referralMessageShown = true;
             }
         }
 
+        function applyBundlePricing() {
+            const bundleThresholds = {6: 20, 12: 40, 24: 75}; // Pricing for bundles
+            let iceCount = 0;
+            let iceItems = [];
+
+            // Count the ice items and store their indices in the cart
+            cart.forEach((item, index) => {
+                if (item.item.toLowerCase().includes('ice')) {
+                    iceCount += item.quantity;
+                    iceItems.push(index);
+                }
+            });
+
+            // Check if the ice count meets any bundle threshold (starting with the largest)
+            for (let threshold of [24, 12, 6]) {
+                if (iceCount >= threshold) {
+                    const bundlePrice = bundleThresholds[threshold];
+
+                    // Add the bundle item to the cart (if not already there)
+                    let existingBundle = cart.find(cartItem => cartItem.item === `Box of ${threshold} Ices`);
+                    if (!existingBundle) {
+                        cart.push({
+                            item: `Box of ${threshold} Ices`,
+                            price: bundlePrice,
+                            quantity: 1,
+                            totalPrice: bundlePrice,
+                            isSpiked: false
+                        });
+                    }
+
+                    // Adjust the prices of individual ice items to $0
+                    iceItems.forEach(index => {
+                        cart[index].totalPrice = 0; // Set individual ice prices to 0
+                    });
+
+                    break; // Exit loop once a valid threshold is applied
+                }
+            }
+        }
+
         function displayCart() {
+            applyBundlePricing();
             const cartList = document.getElementById('cart-list');
             const cartTotal = document.getElementById('cart-total');
             cartList.innerHTML = '';
@@ -469,62 +379,53 @@
 
     <div class="menu-section">
         <h2>Ices</h2>
+        <p class="bundle-info">Boxes 6 for $20 / 12 for $40 / 24 for $75</p>
         <p class="menu-item">Sour Watermelon - $6
-            <span class="ingredient-tooltip">Ingredients: Watermelon, lemon, sugar. Calories: 120</span>
             <input type="number" class="quantity-selector" id="quantity-sour-watermelon" value="1" min="1">
             <label><input type="checkbox" id="spiked-sour-watermelon"> Spiked (+$5)</label>
             <button class="add-to-cart" onclick="addToCart('Sour Watermelon', 6, document.getElementById('quantity-sour-watermelon').value, document.getElementById('spiked-sour-watermelon').checked)">Add to Cart</button>
         </p>
         <p class="menu-item">Watermelon Mint - $5
-            <span class="ingredient-tooltip">Ingredients: Watermelon, mint, sugar. Calories: 110</span>
             <input type="number" class="quantity-selector" id="quantity-watermelon-mint" value="1" min="1">
             <label><input type="checkbox" id="spiked-watermelon-mint"> Spiked (+$5)</label>
             <button class="add-to-cart" onclick="addToCart('Watermelon Mint', 5, document.getElementById('quantity-watermelon-mint').value, document.getElementById('spiked-watermelon-mint').checked)">Add to Cart</button>
         </p>
         <p class="menu-item">Watermelon Lime - $5.75
-            <span class="ingredient-tooltip">Ingredients: Watermelon, lime, sugar. Calories: 115</span>
             <input type="number" class="quantity-selector" id="quantity-watermelon-lime" value="1" min="1">
             <label><input type="checkbox" id="spiked-watermelon-lime"> Spiked (+$5)</label>
             <button class="add-to-cart" onclick="addToCart('Watermelon Lime', 5.75, document.getElementById('quantity-watermelon-lime').value, document.getElementById('spiked-watermelon-lime').checked)">Add to Cart</button>
         </p>
         <p class="menu-item">Sour Cherry - $7
-            <span class="ingredient-tooltip">Ingredients: Cherry, lemon, sugar. Calories: 130</span>
             <input type="number" class="quantity-selector" id="quantity-sour-cherry" value="1" min="1">
             <label><input type="checkbox" id="spiked-sour-cherry"> Spiked (+$5)</label>
             <button class="add-to-cart" onclick="addToCart('Sour Cherry', 7, document.getElementById('quantity-sour-cherry').value, document.getElementById('spiked-sour-cherry').checked)">Add to Cart</button>
         </p>
         <p class="menu-item">Limonana - $6.50
-            <span class="ingredient-tooltip">Ingredients: Lemon, mint, sugar. Calories: 100</span>
             <input type="number" class="quantity-selector" id="quantity-limonana" value="1" min="1">
             <label><input type="checkbox" id="spiked-limonana"> Spiked (+$5)</label>
             <button class="add-to-cart" onclick="addToCart('Limonana', 6.5, document.getElementById('quantity-limonana').value, document.getElementById('spiked-limonana').checked)">Add to Cart</button>
         </p>
         <p class="menu-item">Strawberry Blueberry Lemonade - $8
-            <span class="ingredient-tooltip">Ingredients: Strawberry, blueberry, lemon, sugar. Calories: 140</span>
             <input type="number" class="quantity-selector" id="quantity-strawberry-blueberry-lemonade" value="1" min="1">
             <label><input type="checkbox" id="spiked-strawberry-blueberry-lemonade"> Spiked (+$5)</label>
             <button class="add-to-cart" onclick="addToCart('Strawberry Blueberry Lemonade', 8, document.getElementById('quantity-strawberry-blueberry-lemonade').value, document.getElementById('spiked-strawberry-blueberry-lemonade').checked)">Add to Cart</button>
         </p>
         <p class="menu-item">Strawberry Mojito - $7.50
-            <span class="ingredient-tooltip">Ingredients: Strawberry, mint, lime, sugar. Calories: 125</span>
             <input type="number" class="quantity-selector" id="quantity-strawberry-mojito" value="1" min="1">
             <label><input type="checkbox" id="spiked-strawberry-mojito"> Spiked (+$5)</label>
             <button class="add-to-cart" onclick="addToCart('Strawberry Mojito', 7.5, document.getElementById('quantity-strawberry-mojito').value, document.getElementById('spiked-strawberry-mojito').checked)">Add to Cart</button>
         </p>
         <p class="menu-item">Pineapple Jalapeño - $6.75
-            <span class="ingredient-tooltip">Ingredients: Pineapple, jalapeño, sugar. Calories: 105</span>
             <input type="number" class="quantity-selector" id="quantity-pineapple-jalapeno" value="1" min="1">
             <label><input type="checkbox" id="spiked-pineapple-jalapeno"> Spiked (+$5)</label>
             <button class="add-to-cart" onclick="addToCart('Pineapple Jalapeño', 6.75, document.getElementById('quantity-pineapple-jalapeno').value, document.getElementById('spiked-pineapple-jalapeno').checked)">Add to Cart</button>
         </p>
         <p class="menu-item">Pina Colada - $9
-            <span class="ingredient-tooltip">Ingredients: Pineapple, coconut milk, sugar. Calories: 150</span>
             <input type="number" class="quantity-selector" id="quantity-pina-colada" value="1" min="1">
             <label><input type="checkbox" id="spiked-pina-colada"> Spiked (+$5)</label>
             <button class="add-to-cart" onclick="addToCart('Pina Colada', 9, document.getElementById('quantity-pina-colada').value, document.getElementById('spiked-pina-colada').checked)">Add to Cart</button>
         </p>
         <p class="menu-item">Vanilla Date Smoothie - $8.50
-            <span class="ingredient-tooltip">Ingredients: Dates, vanilla, almond milk. Calories: 160</span>
             <input type="number" class="quantity-selector" id="quantity-vanilla-date-smoothie" value="1" min="1">
             <label><input type="checkbox" id="spiked-vanilla-date-smoothie"> Spiked (+$5)</label>
             <button class="add-to-cart" onclick="addToCart('Vanilla Date Smoothie', 8.5, document.getElementById('quantity-vanilla-date-smoothie').value, document.getElementById('spiked-vanilla-date-smoothie').checked)">Add to Cart</button>
@@ -535,28 +436,24 @@
 
     <div class="menu-section">
         <h2>Desserts</h2>
+        <p class="bundle-info">Parve but can be made dairy upon request</p>
         <p class="menu-item">Healthy Granola - $7
-            <span class="ingredient-tooltip">Ingredients: Oats, honey, nuts, dried fruit. Calories: 200</span>
             <input type="number" class="quantity-selector" id="quantity-healthy-granola" value="1" min="1">
             <button class="add-to-cart" onclick="addToCart('Healthy Granola', 7, document.getElementById('quantity-healthy-granola').value)">Add to Cart</button>
         </p>
         <p class="menu-item">Apple Pie - $9
-            <span class="ingredient-tooltip">Ingredients: Apple, cinnamon, pie crust. Calories: 300</span>
             <input type="number" class="quantity-selector" id="quantity-apple-pie" value="1" min="1">
             <button class="add-to-cart" onclick="addToCart('Apple Pie', 9, document.getElementById('quantity-apple-pie').value)">Add to Cart</button>
         </p>
         <p class="menu-item">Tollhouse Pie - $11
-            <span class="ingredient-tooltip">Ingredients: Chocolate chips, sugar, butter, eggs. Calories: 400</span>
             <input type="number" class="quantity-selector" id="quantity-tollhouse-pie" value="1" min="1">
             <button class="add-to-cart" onclick="addToCart('Tollhouse Pie', 11, document.getElementById('quantity-tollhouse-pie').value)">Add to Cart</button>
         </p>
         <p class="menu-item">Pecan Pie - $12
-            <span class="ingredient-tooltip">Ingredients: Pecans, corn syrup, pie crust. Calories: 450</span>
             <input type="number" class="quantity-selector" id="quantity-pecan-pie" value="1" min="1">
             <button class="add-to-cart" onclick="addToCart('Pecan Pie', 12, document.getElementById('quantity-pecan-pie').value)">Add to Cart</button>
         </p>
         <p class="menu-item">S'mores Pie - $10
-            <span class="ingredient-tooltip">Ingredients: Chocolate, marshmallows, graham cracker crust. Calories: 350</span>
             <input type="number" class="quantity-selector" id="quantity-smores-pie" value="1" min="1">
             <button class="add-to-cart" onclick="addToCart('S'mores Pie', 10, document.getElementById('quantity-smores-pie').value)">Add to Cart</button>
         </p>
@@ -566,38 +463,32 @@
 
     <div class="menu-section">
         <h2>Muddy Buddies</h2>
+        <p class="bundle-info">Parve but can be made dairy upon request</p>
         <p class="menu-item">Matcha - $8
-            <span class="ingredient-tooltip">Ingredients: White chocolate, matcha powder, rice cereal. Calories: 180</span>
             <input type="number" class="quantity-selector" id="quantity-matcha" value="1" min="1">
             <button class="add-to-cart" onclick="addToCart('Matcha', 8, document.getElementById('quantity-matcha').value)">Add to Cart</button>
         </p>
         <p class="menu-item">S'mores - $9
-            <span class="ingredient-tooltip">Ingredients: Milk chocolate, marshmallows, graham cracker. Calories: 190</span>
             <input type="number" class="quantity-selector" id="quantity-smores" value="1" min="1">
             <button class="add-to-cart" onclick="addToCart('S'mores', 9, document.getElementById('quantity-smores').value)">Add to Cart</button>
         </p>
         <p class="menu-item">Dubai Chocolate - $10
-            <span class="ingredient-tooltip">Ingredients: Dark chocolate, dates, cardamom. Calories: 220</span>
             <input type="number" class="quantity-selector" id="quantity-dubai-chocolate" value="1" min="1">
             <button class="add-to-cart" onclick="addToCart('Dubai Chocolate', 10, document.getElementById('quantity-dubai-chocolate').value)">Add to Cart</button>
         </p>
         <p class="menu-item">Sugar Cookie - $7
-            <span class="ingredient-tooltip">Ingredients: White chocolate, sugar cookie mix, rice cereal. Calories: 170</span>
             <input type="number" class="quantity-selector" id="quantity-sugar-cookie" value="1" min="1">
             <button class="add-to-cart" onclick="addToCart('Sugar Cookie', 7, document.getElementById('quantity-sugar-cookie').value)">Add to Cart</button>
         </p>
         <p class="menu-item">Snickerdoodle - $7.50
-            <span class="ingredient-tooltip">Ingredients: Cinnamon, white chocolate, sugar. Calories: 175</span>
             <input type="number" class="quantity-selector" id="quantity-snickerdoodle" value="1" min="1">
             <button class="add-to-cart" onclick="addToCart('Snickerdoodle', 7.5, document.getElementById('quantity-snickerdoodle').value)">Add to Cart</button>
         </p>
         <p class="menu-item">Cookies & Crème - $8.50
-            <span class="ingredient-tooltip">Ingredients: White chocolate, chocolate cookies, rice cereal. Calories: 200</span>
             <input type="number" class="quantity-selector" id="quantity-cookies-creme" value="1" min="1">
             <button class="add-to-cart" onclick="addToCart('Cookies & Crème', 8.5, document.getElementById('quantity-cookies-creme').value)">Add to Cart</button>
         </p>
         <p class="menu-item">Peppermint Bark - $9
-            <span class="ingredient-tooltip">Ingredients: White chocolate, peppermint candies, dark chocolate. Calories: 210</span>
             <input type="number" class="quantity-selector" id="quantity-peppermint-bark" value="1" min="1">
             <button class="add-to-cart" onclick="addToCart('Peppermint Bark', 9, document.getElementById('quantity-peppermint-bark').value)">Add to Cart</button>
         </p>
