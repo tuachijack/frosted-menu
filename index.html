@@ -20,6 +20,13 @@
             margin-top: 10px;
             margin-bottom: 10px;
         }
+            .mascot {
+            width: 120px; /* Same size as the logo */
+            margin-top: 10px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+       
         .menu-title-container {
             margin-bottom: 5px;
         }
@@ -95,10 +102,54 @@
             color: black;
         }
         .divider {
-            width: 80%;
-            margin: 20px auto;
-            border-top: 1px dashed #ADD8E6;
-        }
+    width: 80%;
+    margin: 20px auto;
+    border-top: 2px dotted transparent;
+    background: linear-gradient(to right, #00d9ff, #00d9ff, #00d9ff); /* Gradient between pink and light blue */
+    background-size: 5px 2px;
+    height: 2px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); /* Subtle glowing effect */
+}
+.divider {
+    width: 80%;
+    margin: 20px auto;
+    border-top: 2px dotted transparent;
+    background: linear-gradient(to right, transparent, #00d9ff, #00d9ff, #00d9ff, transparent);
+    background-size: 5px 2px;
+    height: 2px;
+    text-align: center;
+    position: relative;
+    animation: glow-pulse 2s infinite ease-in-out; /* Apply animation to the entire bar */
+    box-shadow: 0 0 8px rgb(0, 38, 255); /* Subtle glowing effect */
+}
+
+.divider:before {
+    content: '❆ ❅ ❆';
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.5em;
+    color: #ADD8E6;
+    text-shadow: 0 0 5px rgba(173, 216, 230, 0.7);
+}
+
+@keyframes glow-pulse {
+    0% {
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.5); /* Initial soft glow */
+    }
+    50% {
+        box-shadow: 0 0 15px rgba(255, 255, 255, 1); /* Intense glow in the middle of animation */
+    }
+    100% {
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.5); /* Return to soft glow */
+    }
+}
+
+
+
         .instagram-link {
             margin-top: 10px;
             display: flex;
@@ -177,6 +228,8 @@
 </head>
 <body>
     <img src="frosted_delights_logo.png" alt="Frosted Delights Logo" class="logo">
+    <img src="frosted_mascot.png" alt="Frosted Delights Mascot" class="mascot">
+
     <div class="menu-title-container">
         <h1 class="menu-title">FROSTED DELIGHTS</h1>
     </div>
