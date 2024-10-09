@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frosted Delights | Home</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Iceberg&display=swap'); /* Frosty Ice Font */
+        
+        body {
+            font-family: "Georgia", serif;
+            background-color: #0a0a0a;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Parallax Container */
+        .parallax {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Title - Frosty Effect */
+        h1 {
+            font-family: 'Iceberg', sans-serif;
+            font-size: 4.5em;
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 0 5px #53e2ff;
+            margin-bottom: 20px;
+            animation: frostEffect 3s ease-out infinite alternate;
+        }
+
+        @keyframes frostEffect {
+            0% {
+                text-shadow: 0 0 5px #ffffff, 0 0 10px #53e2ff;
+            }
+            100% {
+                text-shadow: 0 0 20px #53e2ff, 0 0 30px #ffffff;
+            }
+        }
+
+        /* Buttons */
+        a {
+            text-decoration: none;
+            color: #000;
+            background-color: #53e2ff;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1.3em;
+            margin: 10px;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        a:hover {
+            background-color: #FFD700;
+            box-shadow: 0 0 20px #FFD700, 0 0 40px #FFD700, 0 0 60px #FFD700;
+            transform: scale(1.1);
+        }
+
+        /* Snowfall Animation */
+        .snowflake {
+            position: fixed;
+            top: -10px;
+            color: #ffffff;
+            font-size: 2em;
+            opacity: 0.7;
+            pointer-events: none;
+            animation: fall 15s linear infinite;
+        }
+
+        /* Randomized Snowflake Falling */
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        .snowflake:nth-child(1) { left: 10%; animation-duration: 10s; }
+        .snowflake:nth-child(2) { left: 20%; animation-duration: 12s; }
+        .snowflake:nth-child(3) { left: 35%; animation-duration: 15s; }
+        .snowflake:nth-child(4) { left: 55%; animation-duration: 8s; }
+        .snowflake:nth-child(5) { left: 70%; animation-duration: 13s; }
+
+    </style>
+</head>
+<body>
+
+    <div class="parallax">
+        <!-- Title -->
+        <h1>Frosted Delights</h1>
+
+        <!-- Snowflakes -->
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+        <div class="snowflake">❅</div>
+        <div class="snowflake">❆</div>
+
+        <!-- Buttons -->
+        <a href="website.html">View Menu</a>
+        <a href="gallery.html">Gallery</a>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frosted Delights Menu</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon"> 
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+        body {
+            font-family: "Georgia", serif;
+            background-color: #000000;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            overflow-x: hidden;
+        }
+        .logo {
+            width: 120px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+            .mascot {
+            width: 120px; /* Same size as the logo */
+            margin-top: 10px;
+            margin-bottom: 10px;
+            display: inline-block;
+       
+        }
+       
+        .nav-header {
+    background-color: #53e2ff; /* Matches the background */
+    padding: 10px 0;
+    text-align: center;
+    font-family: 'Georgia', serif;
+}
+
+.nav-header a {
+    color: #000000fd; /* White text color */
+    text-decoration: none;
+    margin: 0 10px; /* Spacing between links */
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.nav-header a:hover {
+    color: #FFD700; /* Gold color on hover */
+}
+
+        .menu-title-container {
+            margin-bottom: 5px;
+        }
+        .menu-title {
+            font-size: 1.5em;
+            font-family: 'Dancing Script', cursive;
+            letter-spacing: 2px;
+            color: #ffffff;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 5px #ffffff;
+        }
+        .flavor-of-the-month {
+            font-size: 1.4em;
+            color: #FFD700;
+            margin-top: 20px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.7), 0 0 5px #FFD700;
+        }
+        .menu-section {
+            display: inline-block;
+            width: 45%;
+            vertical-align: top;
+            margin-top: -10px;
+        }
+        .menu-section h2 {
+            font-size: 1.4em;
+            color: #ffffff;
+            font-family: "Playfair Display", serif;
+            margin-bottom: 8px;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.6), 0 0 4px #ffffff;
+        }
+        .menu-item {
+            font-size: 1.0em;
+            font-weight: 500;
+            color: #ADD8E6;
+            margin: 6px 0;
+            transition: color 0.3s ease-in, transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+        .menu-item:hover {
+            color: #ff00aa;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+        .add-to-cart {
+            background-color: #ADD8E6;
+            color: #000;
+            padding: 5px 10px;
+            font-size: 0.8em;
+            border: none;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .quantity-selector {
+            margin-left: 7px;
+            width: 20px;
+        }
+        .cart {
+            margin-top: 15px;
+            color: #ADD8E6;
+            font-size: 1.2em;
+        }
+        .cart-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .checkout-btn, .clear-cart-btn {
+            margin-top: 15px;
+            background-color: #ADD8E6;
+            padding: 7px 15px;
+            font-size: 1em;
+            border: none;
+            cursor: pointer;
+            color: black;
+        }
+        .divider {
+    width: 80%;
+    margin: 20px auto;
+    border-top: 2px dotted transparent;
+    background: linear-gradient(to right, #00d9ff, #00d9ff, #00d9ff); /* Gradient between pink and light blue */
+    background-size: 5px 2px;
+    height: 2px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); /* Subtle glowing effect */
+}
+.divider {
+    width: 80%;
+    margin: 20px auto;
+    border-top: 2px dotted transparent;
+    background: linear-gradient(to right, transparent, #00d9ff, #00d9ff, #00d9ff, transparent);
+    background-size: 5px 2px;
+    height: 2px;
+    text-align: center;
+    position: relative;
+    animation: glow-pulse 2s infinite ease-in-out; /* Apply animation to the entire bar */
+    box-shadow: 0 0 8px rgb(0, 38, 255); /* Subtle glowing effect */
+}
+
+.divider:before {
+    content: '❆ ❅ ❆';
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.5em;
+    color: #ADD8E6;
+    text-shadow: 0 0 5px rgba(173, 216, 230, 0.7);
+}
+
+@keyframes glow-pulse {
+    0% {
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.5); /* Initial soft glow */
+    }
+    50% {
+        box-shadow: 0 0 15px rgba(255, 255, 255, 1); /* Intense glow in the middle of animation */
+    }
+    100% {
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.5); /* Return to soft glow */
+    }
+}
+
+
+
+        .instagram-link {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+        }
+        .instagram-link img {
+            width: 40px;
+            height: 40px;
+        }
+        footer {
+            margin-top: 30px;
+            font-size: 1em;
+            color: #ADD8E6;
+        }
+        .muddy-buddies {
+            display: block;
+            margin-top: -10px;
+            width: 100%;
+        }
+        .snowflake {
+            position: fixed;
+            top: -10px;
+            color: #ffffff;
+            font-size: 0.8em;
+            opacity: 0.3;
+            pointer-events: none;
+            animation: fall 20s linear infinite;
+        }
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px);
+            }
+            100% {
+                transform: translateY(100vh);
+            }
+        }
+        .special-request {
+            margin-top: 20px;
+        }
+        .prompt-box {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #000;
+            color: #ADD8E6;
+            border: 2px solid #ADD8E6;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+        .prompt-box img {
+            width: 50px;
+            margin-bottom: 10px;
+        }
+        .bundle-info {
+            font-size: 0.9em;
+            color: #228B22;
+            margin-top: 4px;
+        }
+        /* Instagram feed styling */
+        .instagram-feed {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .instagram-feed img {
+            width: 100px;
+            height: 100px;
+            margin: 5px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <body>
+        <img src="frosted_delights_logo.png" alt="Frosted Delights Logo" class="logo">
+        <img src="frosted_mascot.png" alt="Frosted Delights Mascot" class="mascot">
+    
+        <!-- Updated navigation header -->
+        <div class="nav-header">
+            <a href="homepage.html">Homepage</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="#ices-section">Ices</a>
+            <a href="#desserts-section">Desserts</a>
+            <a href="#muddy-buddies-section">Muddy Buddies</a>
+            <a href="#pies">Pies </a>
+
+        </div>
+    
+        <div class="menu-title-container">
+            <h1 class="menu-title">FROSTED DELIGHTS</h1>
+        </div>
+    
+
+
+    <div class="flavor-of-the-month">
+        Flavor of the Month: Pineapple Jalapeño Bliss
+    </div>
+
+    <!-- Instagram Feed Section -->
+<!-- Instagram Feed Section (Changed to JPG Image Uploads) -->
+<div class="instagram-feed">
+    <img src="your-image-1.png" alt="Image 1">
+    <img src="your-image-2.png" alt="Image 2">
+    <img src="your-image-3.png" alt="Image 3">
+    <img src="your-image-4.png" alt="Image 4">
+</div>
+
+
+
+    <!-- Special Request Section -->
+    <div class="special-request">
+        <label for="special-request">Special Request:</label>
+        <input type="text" id="special-request" placeholder="e.g., No sugar, Make Dairy">
+    </div>
+
+    <!-- Cart Section -->
+    <div class="cart">
+        <h3>Your Cart</h3>
+        <ul id="cart-list" class="cart-list"></ul>
+        <p id="cart-total"></p>
+        <button class="checkout-btn" onclick="showCheckoutMessage()">Checkout</button>
+        <button class="clear-cart-btn" onclick="clearCart()">Clear Cart</button>
+    </div>
+
+    <!-- Snowflake Elements -->
+    <div id="snowflakes-container"></div>
+
+    <script>
+        // Generate snowflakes
+        const snowflakesContainer = document.getElementById('snowflakes-container');
+        const snowflakeSymbols = ['❅', '❆', '✼', '✻', '✽'];
+        const numberOfSnowflakes = 10;
+        for (let i = 0; i < numberOfSnowflakes; i++) {
+            const snowflake = document.createElement('div');
+            snowflake.className = 'snowflake';
+            snowflake.innerText = snowflakeSymbols[Math.floor(Math.random() * snowflakeSymbols.length)];
+            snowflake.style.left = Math.random() * 100 + 'vw';
+            snowflake.style.animationDuration = Math.random() * 5 + 5 + 's';
+            snowflake.style.fontSize = Math.random() * 1.2 + 0.8 + 'em';
+            snowflakesContainer.appendChild(snowflake);
+        }
+
+        let cart = [];
+        let referralMessageShown = false;
+
+        function addToCart(itemName, price, quantity = 1, isSpiked = false) {
+            quantity = parseInt(quantity);
+            let extraCost = isSpiked ? 5 : 0;
+            let finalPrice = (price + extraCost) * quantity;
+
+            let existingItem = cart.find(cartItem => cartItem.item === itemName && cartItem.isSpiked === isSpiked);
+            if (existingItem) {
+                existingItem.quantity += quantity;
+                existingItem.totalPrice += finalPrice;
+            } else {
+                cart.push({ item: itemName, price: price, quantity: quantity, totalPrice: finalPrice, isSpiked: isSpiked });
+            }
+            displayCart();
+
+            if (!referralMessageShown) {
+                showRecommendationPrompt();
+                referralMessageShown = true;
+            }
+        }function applyBundlePricing() {
+    const bundleThresholds = {6: 20, 12: 40, 24: 75}; // Pricing for bundles
+    let iceCount = 0;
+    let iceItems = [];
+
+    // Count the ice items and store their indices in the cart
+    cart.forEach((item, index) => {
+        // Ensure to check for relevant ices by name (adjust based on your item names)
+        if (item.item.toLowerCase().includes('ice')) {
+            iceCount += item.quantity;
+            iceItems.push({ index, quantity: item.quantity }); // Store both index and quantity
+        }
+    });
+
+    // If iceCount doesn't meet any threshold, return without applying bundle pricing
+    if (iceCount < 6) return;
+
+    // Check if the ice count meets any bundle threshold (starting with the largest)
+    for (let threshold of [24, 12, 6]) {
+        if (iceCount >= threshold) {
+            const bundlePrice = bundleThresholds[threshold];
+
+            // Add or update the bundle item in the cart
+            let existingBundle = cart.find(cartItem => cartItem.item === `Box of ${threshold} Ices`);
+            if (!existingBundle) {
+                // If bundle doesn't exist, add it to the cart
+                cart.push({
+                    item: `Box of ${threshold} Ices`,
+                    price: bundlePrice,
+                    quantity: 1,
+                    totalPrice: bundlePrice,
+                    isSpiked: false
+                });
+            } else {
+                // If bundle exists, update its price and quantity
+                existingBundle.price = bundlePrice;
+                existingBundle.totalPrice = bundlePrice;
+                existingBundle.quantity = 1; // Assuming a fixed quantity for bundles
+            }
+
+            // Adjust the prices of individual ice items to $0 to reflect bundle
+            let itemsAdjusted = 0;
+            iceItems.forEach(({ index, quantity }) => {
+                if (itemsAdjusted + quantity <= threshold) {
+                    cart[index].totalPrice = 0; // Set item price to $0 as part of the bundle
+                    itemsAdjusted += quantity;
+                } else {
+                    let remaining = threshold - itemsAdjusted;
+                    cart[index].totalPrice = (remaining / cart[index].quantity) * cart[index].price;
+                    itemsAdjusted += remaining;
+                }
+            });
+
+            break; // Exit loop once a valid threshold is applied
+        }
+    }
+}
+
+
+        function displayCart() {
+            applyBundlePricing();
+            const cartList = document.getElementById('cart-list');
+            const cartTotal = document.getElementById('cart-total');
+            cartList.innerHTML = '';
+            let totalAmount = 0;
+            cart.forEach((cartItem, index) => {
+                totalAmount += cartItem.totalPrice;
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `${cartItem.item} x${cartItem.quantity} ${cartItem.isSpiked ? '(Spiked)' : ''} - $${cartItem.totalPrice.toFixed(2)} <button onclick="removeFromCart(${index})">Remove</button>`;
+                cartList.appendChild(listItem);
+            });
+            cartTotal.innerHTML = `Total: $${totalAmount.toFixed(2)}`;
+        }
+
+        function removeFromCart(index) {
+            if (cart[index].quantity > 1) {
+                cart[index].quantity -= 1;
+                cart[index].totalPrice -= cart[index].price;
+            } else {
+                cart.splice(index, 1);
+            }
+            displayCart();
+        }
+
+        function clearCart() {
+            cart = [];
+            displayCart();
+        }
+
+        function showRecommendationPrompt() {
+            const promptBox = document.createElement('div');
+            promptBox.classList.add('prompt-box');
+            promptBox.innerHTML = `<img src="frosted_mascot.png" alt="Mascot"><p>How about adding a dessert with your pop?</p><button onclick="closePrompt(this)">Okay!</button>`;
+            document.body.appendChild(promptBox);
+        }
+
+        function closePrompt(element) {
+            document.body.removeChild(element.parentElement);
+        }
+
+        function showCheckoutMessage() {
+            const promptBox = document.createElement('div');
+            promptBox.classList.add('prompt-box');
+            promptBox.innerHTML = `<img src="frosted_mascot.png" alt="Mascot"><p>You will be taken to WhatsApp to complete your order.</p><button onclick="closePrompt(this); checkout();">Proceed</button>`;
+            document.body.appendChild(promptBox);
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert("Your cart is empty!");
+                return;
+            }
+            let order = "Hi, can I please order:\n";
+            order += cart.map(item => `${item.item} x${item.quantity} ${item.isSpiked ? '(Spiked)' : ''} - $${item.totalPrice.toFixed(2)}`).join('\n');
+            let total = cart.reduce((acc, item) => acc + item.totalPrice, 0);
+            let specialRequest = document.getElementById('special-request').value;
+            let message = `${order}\n\nTotal: $${total.toFixed(2)}\nSpecial Request: ${specialRequest}`;
+
+            // Send order to phone numbers using WhatsApp
+            let phoneNumber1 = "whatsapp://send?phone=+17327209910&text=" + encodeURIComponent(message);
+            let phoneNumber2 = "whatsapp://send?phone=+13476621528&text=" + encodeURIComponent(message);
+            window.open(phoneNumber1, "_blank");
+            window.open(phoneNumber2, "_blank");
+
+            clearCart();
+        }
+    </script>
+
+<div class="menu-section" id="ices-section">
+    <h2>Ices</h2>
+        <p class="bundle-info">Boxes 6 for $20 / 12 for $40 / 24 for $75</p>
+        <p class="menu-item">Sour Watermelon - $6
+            <input type="number" class="quantity-selector" id="quantity-sour-watermelon" value="1" min="1">
+            <label><input type="checkbox" id="spiked-sour-watermelon"> Spiked (+$5)</label>
+            <button class="add-to-cart" onclick="addToCart('Sour Watermelon', 6, document.getElementById('quantity-sour-watermelon').value, document.getElementById('spiked-sour-watermelon').checked)">Add to Cart</button>
+        </p>
+        <p class="menu-item">Watermelon Mint - $5
+            <input type="number" class="quantity-selector" id="quantity-watermelon-mint" value="1" min="1">
+            <label><input type="checkbox" id="spiked-watermelon-mint"> Spiked (+$5)</label>
+            <button class="add-to-cart" onclick="addToCart('Watermelon Mint', 5, document.getElementById('quantity-watermelon-mint').value, document.getElementById('spiked-watermelon-mint').checked)">Add to Cart</button>
+        </p>
+        <p class="menu-item">Watermelon Lime - $5.75
+            <input type="number" class="quantity-selector" id="quantity-watermelon-lime" value="1" min="1">
+            <label><input type="checkbox" id="spiked-watermelon-lime"> Spiked (+$5)</label>
+            <button class="add-to-cart" onclick="addToCart('Watermelon Lime', 5.75, document.getElementById('quantity-watermelon-lime').value, document.getElementById('spiked-watermelon-lime').checked)">Add to Cart</button>
+        </p>
+        <p class="menu-item">Sour Cherry - $7
+            <input type="number" class="quantity-selector" id="quantity-sour-cherry" value="1" min="1">
+            <label><input type="checkbox" id="spiked-sour-cherry"> Spiked (+$5)</label>
+            <button class="add-to-cart" onclick="addToCart('Sour Cherry', 7, document.getElementById('quantity-sour-cherry').value, document.getElementById('spiked-sour-cherry').checked)">Add to Cart</button>
+        </p>
+        <p class="menu-item">Limonana - $6.50
+            <input type="number" class="quantity-selector" id="quantity-limonana" value="1" min="1">
+            <label><input type="checkbox" id="spiked-limonana"> Spiked (+$5)</label>
+            <button class="add-to-cart" onclick="addToCart('Limonana', 6.5, document.getElementById('quantity-limonana').value, document.getElementById('spiked-limonana').checked)">Add to Cart</button>
+        </p>
+        <p class="menu-item">Strawberry Blueberry Lemonade - $8
+            <input type="number" class="quantity-selector" id="quantity-strawberry-blueberry-lemonade" value="1" min="1">
+            <label><input type="checkbox" id="spiked-strawberry-blueberry-lemonade"> Spiked (+$5)</label>
+            <button class="add-to-cart" onclick="addToCart('Strawberry Blueberry Lemonade', 8, document.getElementById('quantity-strawberry-blueberry-lemonade').value, document.getElementById('spiked-strawberry-blueberry-lemonade').checked)">Add to Cart</button>
+        </p>
+        <p class="menu-item">Strawberry Mojito - $7.50
+            <input type="number" class="quantity-selector" id="quantity-strawberry-mojito" value="1" min="1">
+            <label><input type="checkbox" id="spiked-strawberry-mojito"> Spiked (+$5)</label>
+            <button class="add-to-cart" onclick="addToCart('Strawberry Mojito', 7.5, document.getElementById('quantity-strawberry-mojito').value, document.getElementById('spiked-strawberry-mojito').checked)">Add to Cart</button>
+        </p>
+        <p class="menu-item">Pineapple Jalapeño - $6.75
+            <input type="number" class="quantity-selector" id="quantity-pineapple-jalapeno" value="1" min="1">
+            <label><input type="checkbox" id="spiked-pineapple-jalapeno"> Spiked (+$5)</label>
+            <button class="add-to-cart" onclick="addToCart('Pineapple Jalapeño', 6.75, document.getElementById('quantity-pineapple-jalapeno').value, document.getElementById('spiked-pineapple-jalapeno').checked)">Add to Cart</button>
+        </p>
+        <p class="menu-item">Pina Colada - $9
+            <input type="number" class="quantity-selector" id="quantity-pina-colada" value="1" min="1">
+            <label><input type="checkbox" id="spiked-pina-colada"> Spiked (+$5)</label>
+            <button class="add-to-cart" onclick="addToCart('Pina Colada', 9, document.getElementById('quantity-pina-colada').value, document.getElementById('spiked-pina-colada').checked)">Add to Cart</button>
+        </p>
+        <p class="menu-item">Vanilla Date Smoothie - $8.50
+            <input type="number" class="quantity-selector" id="quantity-vanilla-date-smoothie" value="1" min="1">
+            <button class="add-to-cart" onclick="addToCart('Vanilla Date Smoothie', 8.5, document.getElementById('quantity-vanilla-date-smoothie').value)">Add to Cart</button>
+        </p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="menu-section" id="desserts-section">
+        <h2>Desserts</h2>
+        <p class="bundle-info">Parve but can be made dairy upon request</p>
+        <p class="menu-item">Healthy Granola - $7
+            <input type="number" class="quantity-selector" id="quantity-healthy-granola" value="1" min="1">
+            <button class="add-to-cart" onclick="addToCart('Healthy Granola', 7, document.getElementById('quantity-healthy-granola').value)">Add to Cart</button>
+        </p>
+        <p class="menu-item">Chocolate Tahini Brownies - $10</p>
+        <input type="number" class="quantity-selector" id="quantity-chocolate-tahini-brownies" value="1" min="1">
+        <button class="add-to-cart" onclick="addToCart('Chocolate Tahini Brownies', 7, document.getElementById('quantity-chocolate-tahini-brownies').value)">Add to Cart</button>
+    </p>
+        <p class="menu-item">Berry Crumble Bars - $8</p>
+        <input type="number" class="quantity-selector" id="quantity-berry-crumble-bars" value="1" min="1">
+        <button class="add-to-cart" onclick="addToCart(' Berry Crumble Bars', 7, document.getElementById('quantity-berry-crumble-bars').value)">Add to Cart</button>
+    </p>
+        <p class="menu-item">Peanut Butter Chocolate Chip Cookies - $6</p>
+        <input type="number" class="quantity-selector" id="quantity-peanut-butter-choclate-chip-cookies" value="1" min="1">
+            <button class="add-to-cart" onclick="addToCart('Peanut Butter Chocolate Chip Cookies', 7, document.getElementById('quantity-peanut-butter-choclate-chip-cookies').value)">Add to Cart</button>
+        </p>
+        <p class="menu-item">Blueberry Lemon Bars - $7</p>
+        <input type="number" class="quantity-selector" id="quantity-blueberry-lemon-bars" value="1" min="1">
+        <button class="add-to-cart" onclick="addToCart(' Blueberry Lemon Bars', 7, document.getElementById('quantity-blueberry-lemon-bars').value)">Add to Cart</button>
+    </p>
+    </div>
+
+       
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="menu-section" id="muddy-buddies-section">
+        <h2>Muddy Buddies</h2>
+        <p class="bundle-info">Parve but can be made dairy upon request</p>
+        <p class="menu-item">Matcha - $8
+            <input type="number" class="quantity-selector" id="quantity-matcha" value="1" min="1">
+            <button class="add-to-cart" onclick="addToCart('Matcha', 8, document.getElementById('quantity-matcha').value)">Add to Cart</button>
+        </p>
+        <p class="menu-item">S'mores - $9
+            <input type="number" class="quantity-selector" id="quantity-smores" value="1" min="1">
+            <button class="add-to-cart" onclick="addToCart('S\'mores', 9, document.getElementById('quantity-smores').value)">Add to Cart</button>
+        </p>
+        <p class="menu-item">Dubai Chocolate - $10
+            <input type="number" class="quantity-selector" id="quantity-dubai-chocolate" value="1" min="1">
+            <button class="add-to-cart" onclick="addToCart('Dubai Chocolate', 10, document.getElementById('quantity-dubai-chocolate').value)">Add to Cart</button>
+        </p>
+        <p class="menu-item">Sugar Cookie - $7
+            <input type="number" class="quantity-selector" id="quantity-sugar-cookie" value="1" min="1">
+            <button class="add-to-cart" onclick="addToCart('Sugar Cookie', 7, document.getElementById('quantity-sugar-cookie').value)">Add to Cart</button>
+        </p>
+        <p class="menu-item">Snickerdoodle - $7.50
+            <input type="number" class="quantity-selector" id="quantity-snickerdoodle" value="1" min="1">
+            <button class="add-to-cart" onclick="addToCart('Snickerdoodle', 7.5, document.getElementById('quantity-snickerdoodle').value)">Add to Cart</button>
+        </p>
+        <p class="menu-item">Cookies & Crème - $8.50
+            <input type="number" class="quantity-selector" id="quantity-cookies-creme" value="1" min="1">
+            <button class="add-to-cart" onclick="addToCart('Cookies & Crème', 8.5, document.getElementById('quantity-cookies-creme').value)">Add to Cart</button>
+        </p>
+        <p class="menu-item">Peppermint Bark - $9
+            <input type="number" class="quantity-selector" id="quantity-peppermint-bark" value="1" min="1">
+            <button class="add-to-cart" onclick="addToCart('Peppermint Bark', 9, document.getElementById('quantity-peppermint-bark').value)">Add to Cart</button>
+        </p>
+    </div>
+   
+    <div class="divider"></div>
+
+
+    <div class="menu-section" id="-pies">
+        <h2>pies</h2>
+        <p class="menu-item">Apple Pie - $9
+            <input type="number" class="quantity-selector" id="quantity-apple-pie" value="1" min="1">
+            <button class="add-to-cart" onclick="addToCart('Apple Pie', 9, document.getElementById('quantity-apple-pie').value)">Add to Cart</button>
+        </p>
+            <p class="menu-item">Tollhouse Pie - $11
+                <input type="number" class="quantity-selector" id="quantity-tollhouse-pie" value="1" min="1">
+                <button class="add-to-cart" onclick="addToCart('Tollhouse Pie', 11, document.getElementById('quantity-tollhouse-pie').value)">Add to Cart</button>
+            </p>
+            <p class="menu-item">Pecan Pie - $12
+                <input type="number" class="quantity-selector" id="quantity-pecan-pie" value="1" min="1">
+                <button class="add-to-cart" onclick="addToCart('Pecan Pie', 12, document.getElementById('quantity-pecan-pie').value)">Add to Cart</button>
+            </p>
+            <p class="menu-item">S'mores Pie - $10
+                <input type="number" class="quantity-selector" id="quantity-smores-pie" value="1" min="1">
+                <button class="add-to-cart" onclick="addToCart('S\'mores Pie', 10, document.getElementById('quantity-smores-pie').value)">Add to Cart</button>
+            </p>      
+</body>
+</html>

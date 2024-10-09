@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frosted Delights | Gallery</title>
+    <style>
+        body {
+            font-family: "Georgia", serif;
+            background-color: #0a0a0a;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        /* Navigation Header */
+        .nav-header {
+            background-color: #53e2ff;
+            padding: 15px 0;
+            text-align: center;
+        }
+
+        .nav-header a {
+            color: #000;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .nav-header a:hover {
+            color: #FFD700;
+        }
+
+        /* Title Styling */
+        h1 {
+            font-family: 'Iceberg', sans-serif;
+            font-size: 3.5em;
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 0 0 5px #53e2ff;
+            margin: 40px 0;
+        }
+
+        /* Gallery Grid */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Adjusted size for smaller images */
+            grid-gap: 15px;
+            padding: 0 5%;
+            margin-bottom: 40px;
+        }
+
+        /* Individual Image Container */
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        /* Image Styling */
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        /* Hover Effect on Image */
+        .gallery-item:hover img {
+            transform: scale(1.1); /* Slight zoom on hover */
+        }
+
+        /* Caption */
+        .caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 8px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            font-size: 1em;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        /* Show Caption on Hover */
+        .gallery-item:hover .caption {
+            opacity: 1;
+        }
+
+        /* Lightbox Styling */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 80%;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+
+        .lightbox .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 2em;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        /* Fade-in animation */
+        .gallery-item {
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Header -->
+    <div class="nav-header">
+        <a href="index.html">Home</a>
+        <a href="website.html">Menu</a>
+    </div>
+
+    <h1>Our Frosty Creations</h1>
+
+    <!-- Gallery Grid -->
+    <div class="gallery">
+        <div class="gallery-item" onclick="openLightbox(this)">
+            <img src="your-image-1.png" alt="Image 1">
+            <div class="caption">Ice Pop 1</div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this)">
+            <img src="your-image-2.png" alt="Image 2">
+            <div class="caption">Ice Pop 2</div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this)">
+            <img src="your-image-3.png" alt="Image 3">
+            <div class="caption">Ice Pop 3</div>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this)">
+            <img src="your-image-4.png" alt="Image 4">
+            <div class="caption">Ice Pop 4</div>
+        </div>
+    </div>
+
+    <!-- Lightbox for Enlarged Images -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="close">&times;</span>
+        <img id="lightbox-img" src="" alt="Enlarged Image">
+    </div>
+
+    <script>
+        // Open the lightbox and display the clicked image
+        function openLightbox(element) {
+            const lightbox = document.getElementById('lightbox');
+            const img = element.querySelector('img').src;
+            document.getElementById('lightbox-img').src = img;
+            lightbox.style.display = 'flex';
+        }
+
+        // Close the lightbox
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+    </script>
+
+</body>
+</html>
