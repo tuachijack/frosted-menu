@@ -357,11 +357,11 @@
             const bundlePrice = bundleThresholds[threshold];
 
             // Add or update the bundle item in the cart
-            let existingBundle = cart.find(cartItem => cartItem.item === `Box of ${threshold} Ices`);
+            let existingBundle = cart.find(cartItem => cartItem.item === Box of ${threshold} Ices);
             if (!existingBundle) {
                 // If bundle doesn't exist, add it to the cart
                 cart.push({
-                    item: `Box of ${threshold} Ices`,
+                    item: Box of ${threshold} Ices,
                     price: bundlePrice,
                     quantity: 1,
                     totalPrice: bundlePrice,
@@ -402,10 +402,10 @@
             cart.forEach((cartItem, index) => {
                 totalAmount += cartItem.totalPrice;
                 const listItem = document.createElement('li');
-                listItem.innerHTML = `${cartItem.item} x${cartItem.quantity} ${cartItem.isSpiked ? '(Spiked)' : ''} - $${cartItem.totalPrice.toFixed(2)} <button onclick="removeFromCart(${index})">Remove</button>`;
+                listItem.innerHTML = ${cartItem.item} x${cartItem.quantity} ${cartItem.isSpiked ? '(Spiked)' : ''} - $${cartItem.totalPrice.toFixed(2)} <button onclick="removeFromCart(${index})">Remove</button>;
                 cartList.appendChild(listItem);
             });
-            cartTotal.innerHTML = `Total: $${totalAmount.toFixed(2)}`;
+            cartTotal.innerHTML = Total: $${totalAmount.toFixed(2)};
         }
 
         function removeFromCart(index) {
@@ -426,7 +426,7 @@
         function showRecommendationPrompt() {
             const promptBox = document.createElement('div');
             promptBox.classList.add('prompt-box');
-            promptBox.innerHTML = `<img src="frosted_mascot.png" alt="Mascot"><p>How about adding a dessert with your pop?</p><button onclick="closePrompt(this)">Okay!</button>`;
+            promptBox.innerHTML = <img src="frosted_mascot.png" alt="Mascot"><p>How about adding a dessert with your pop?</p><button onclick="closePrompt(this)">Okay!</button>;
             document.body.appendChild(promptBox);
         }
 
@@ -437,7 +437,7 @@
         function showCheckoutMessage() {
             const promptBox = document.createElement('div');
             promptBox.classList.add('prompt-box');
-            promptBox.innerHTML = `<img src="frosted_mascot.png" alt="Mascot"><p>You will be taken to WhatsApp to complete your order.</p><button onclick="closePrompt(this); checkout();">Proceed</button>`;
+            promptBox.innerHTML = <img src="frosted_mascot.png" alt="Mascot"><p>You will be taken to WhatsApp to complete your order.</p><button onclick="closePrompt(this); checkout();">Proceed</button>;
             document.body.appendChild(promptBox);
         }
 
@@ -447,10 +447,10 @@
                 return;
             }
             let order = "Hi, can I please order:\n";
-            order += cart.map(item => `${item.item} x${item.quantity} ${item.isSpiked ? '(Spiked)' : ''} - $${item.totalPrice.toFixed(2)}`).join('\n');
+            order += cart.map(item => ${item.item} x${item.quantity} ${item.isSpiked ? '(Spiked)' : ''} - $${item.totalPrice.toFixed(2)}).join('\n');
             let total = cart.reduce((acc, item) => acc + item.totalPrice, 0);
             let specialRequest = document.getElementById('special-request').value;
-            let message = `${order}\n\nTotal: $${total.toFixed(2)}\nSpecial Request: ${specialRequest}`;
+            let message = ${order}\n\nTotal: $${total.toFixed(2)}\nSpecial Request: ${specialRequest};
 
             // Send order to phone numbers using WhatsApp
             let phoneNumber1 = "whatsapp://send?phone=+17327209910&text=" + encodeURIComponent(message);
@@ -579,4 +579,3 @@
     </div>
 </body>
 </html>
-
