@@ -28,10 +28,45 @@
             display: inline-block;
        
         }
-       
+       /* Adjusted Menu Item Spacing */
+.menu-item {
+    font-size: 1.0em;
+    font-weight: 500;
+    color: #ADD8E6;
+    margin: 15px 0; /* Increased margin for better spacing */
+    transition: color 0.3s ease-in, transform 0.2s, box-shadow 0.2s;
+    position: relative;
+}
+
+/* Adjust the width for mobile devices */
+.menu-section {
+    display: inline-block;
+    width: 100%; /* Full width on mobile */
+    margin-top: 10px;
+    padding: 0 10px; /* Add padding for breathing room */
+}
+
+@media screen and (max-width: 768px) {
+    .menu-item {
+        font-size: 1.1em; /* Slightly larger font size for better readability on mobile */
+        margin: 20px 0; /* Extra spacing between items on mobile */
+    }
+
+    .menu-section {
+        width: 100%; /* Ensure sections take up full width on mobile */
+        margin-top: 15px; /* Add more space above sections */
+    }
+
+    .quantity-selector, .add-to-cart {
+        display: block;
+        margin: 10px 0; /* Stack quantity selectors and buttons on mobile */
+    }
+}
+
+
         .nav-header {
     background-color: #53e2ff; /* Matches the background */
-    padding: 7 px 0;
+    padding: 10px 0;
     text-align: center;
     font-family: 'Georgia', serif;
 }
@@ -39,8 +74,8 @@
 .nav-header a {
     color: #000000fd; /* White text color */
     text-decoration: none;
-    margin: 0 4px; /* Spacing between links */
-    font-size: 0.7em;
+    margin: 0 10px; /* Spacing between links */
+    font-size: 0.9em;
     font-weight: bold;
 }
 
@@ -254,7 +289,7 @@
     
         <!-- Updated navigation header -->
         <div class="nav-header">
-            <a href="index.html">Homepage</a>
+            <a href="homepage.html">Homepage</a>
             <a href="gallery.html">Gallery</a>
             <a href="#ices-section">Ices</a>
             <a href="#desserts-section">Desserts</a>
@@ -578,22 +613,22 @@
 
 
     <div class="menu-section" id="-pies">
-        <h2>Pies</h2>
-        <p class="menu-item">Apple Pie - $40
+        <h2>pies</h2>
+        <p class="menu-item">Apple Pie - $9
             <input type="number" class="quantity-selector" id="quantity-apple-pie" value="1" min="1">
-            <button class="add-to-cart" onclick="addToCart('Apple Pie', 40, document.getElementById('quantity-apple-pie').value)">Add to Cart</button>
+            <button class="add-to-cart" onclick="addToCart('Apple Pie', 9, document.getElementById('quantity-apple-pie').value)">Add to Cart</button>
         </p>
-            <p class="menu-item">Tollhouse Pie - $35
+            <p class="menu-item">Tollhouse Pie - $11
                 <input type="number" class="quantity-selector" id="quantity-tollhouse-pie" value="1" min="1">
-                <button class="add-to-cart" onclick="addToCart('Tollhouse Pie', 35, document.getElementById('quantity-tollhouse-pie').value)">Add to Cart</button>
+                <button class="add-to-cart" onclick="addToCart('Tollhouse Pie', 11, document.getElementById('quantity-tollhouse-pie').value)">Add to Cart</button>
             </p>
-            <p class="menu-item">Pecan Pie - $45
+            <p class="menu-item">Pecan Pie - $12
                 <input type="number" class="quantity-selector" id="quantity-pecan-pie" value="1" min="1">
-                <button class="add-to-cart" onclick="addToCart('Pecan Pie', 45, document.getElementById('quantity-pecan-pie').value)">Add to Cart</button>
+                <button class="add-to-cart" onclick="addToCart('Pecan Pie', 12, document.getElementById('quantity-pecan-pie').value)">Add to Cart</button>
             </p>
-            <p class="menu-item">S'mores Pie - $20
+            <p class="menu-item">S'mores Pie - $10
                 <input type="number" class="quantity-selector" id="quantity-smores-pie" value="1" min="1">
-                <button class="add-to-cart" onclick="addToCart('S\'mores Pie', 20, document.getElementById('quantity-smores-pie').value)">Add to Cart</button>
+                <button class="add-to-cart" onclick="addToCart('S\'mores Pie', 10, document.getElementById('quantity-smores-pie').value)">Add to Cart</button>
             </p>      
 </body>
 </html>
